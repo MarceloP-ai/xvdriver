@@ -2,3 +2,4 @@ LIBRARY xvdriver
 EXPORTS
     vkGetInstanceProcAddr
     vkGetDeviceProcAddr
+    vkNegotiateLoaderLayerInterfaceVersion
