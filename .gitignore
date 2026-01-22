@@ -1,7 +1,8 @@
 build/
-bin/
+bin/*.dll
 .vs/
-out/
 *.user
 *.sln
-*.vcxproj
+*.vcxproj*
+*.filters
+*.dir/

@@ -1,0 +1,6 @@
+[XV] Swapchain: 500x500
+[XV] Recursos de injeção HUD prontos.
+[XV] HUD: Camada ativa e interceptando frames.
+[XV] HUD: Device criado. Tentando alocar buffer de teste...
+[XV] HUD: Buffer de staging criado com sucesso.
+[XV] HUD: Memoria de dispositivo vinculada.

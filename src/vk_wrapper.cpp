@@ -1,7 +1,12 @@
-﻿#include <chrono>
+#include <vulkan/vulkan.h>
+#include <vulkan/vk_layer.h>
+#include <chrono>
 #include <iostream>
+#include <string>
 
-// Funcao de calculo de FPS injetada
+extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetInstanceProcAddr(VkInstance instance, const char* pName);
+extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetDeviceProcAddr(VkDevice device, const char* pName);
+
 void UpdateFPS() {
     static auto lastTime = std::chrono::high_resolution_clock::now();
     static uint32_t frameCount = 0;
@@ -14,47 +19,32 @@ void UpdateFPS() {
         lastTime = currentTime;
     }
 }
-#include <vulkan/vulkan.h>
-#include <vulkan/vk_layer.h>
-#include <iostream>
-#include <cstring>
 
-// FunÃ§Ã£o de apoio (hook)
-VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateInstance(const VkInstanceCreateInfo* pCI, const VkAllocationCallbacks* pA, VkInstance* pI) {
-    std::cout << "\n\n[XVDriver] SUCESSO: LAYER INJETADA!\n\n" << std::endl;
-    VkLayerInstanceCreateInfo* ci = (VkLayerInstanceCreateInfo*)pCI->pNext;
-    while (ci && !(ci->sType == VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO && ci->function == VK_LAYER_LINK_INFO)) {
-        ci = (VkLayerInstanceCreateInfo*)ci->pNext;
-    }
-    if (!ci) return VK_ERROR_INITIALIZATION_FAILED;
-    PFN_vkGetInstanceProcAddr nextGipa = ci->u.pLayerInfo->pfnNextGetInstanceProcAddr;
-    ci->u.pLayerInfo = ci->u.pLayerInfo->pNext;
-    PFN_vkCreateInstance nextCreate = (PFN_vkCreateInstance)nextGipa(VK_NULL_HANDLE, "vkCreateInstance");
-    return nextCreate(pCI, pA, pI);
+extern "C" VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
+    UpdateFPS();
+    return VK_SUCCESS;
 }
 
-// FunÃ§Ãµes padrÃ£o da Layer
-extern "C" {
-    VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetInstanceProcAddr(VkInstance inst, const char* name) {
-        if (strcmp(name, "vkCreateInstance") == 0) return (PFN_vkVoidFunction)xv_vkCreateInstance;
-        return nullptr;
-    }
-
-    VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetDeviceProcAddr(VkDevice dev, const char* name) {
-        return nullptr;
-    }
+extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
+    if (std::string(pName) == "vkGetInstanceProcAddr") return (PFN_vkVoidFunction)xv_vkGetInstanceProcAddr;
+    if (std::string(pName) == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+    return nullptr;
 }
 
+extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
+    if (std::string(pName) == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
+    if (std::string(pName) == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+    return nullptr;
+}
 
 extern "C" VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
-    if (pVersionStruct->loader_layer_interface_version >= 2) {
-        pVersionStruct->loader_layer_interface_version = 2;
-        pVersionStruct->pfnGetInstanceProcAddr = vkGetInstanceProcAddr;
-        pVersionStruct->pfnGetDeviceProcAddr = vkGetDeviceProcAddr;
+    // Acessando via cast para evitar que o compilador use o nome "loader_layer_interface_version" bugado
+    uint32_t* pVersion = (uint32_t*)pVersionStruct;
+    if (*pVersion >= 2) {
+        *pVersion = 2;
+        pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
+        pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
         pVersionStruct->pfnGetPhysicalDeviceProcAddr = nullptr;
     }
     return VK_SUCCESS;
 }
-    return VK_SUCCESS;
-}
-

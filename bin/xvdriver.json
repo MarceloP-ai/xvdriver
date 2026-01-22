@@ -1,0 +1,15 @@
+﻿{
+    "file_format_version": "1.0.0",
+    "layer": {
+        "name": "VK_LAYER_XVDriver",
+        "type": "GLOBAL",
+        "library_path": "C:/Projeto/xvdriver/bin/xvdriver.dll",
+        "api_version": "1.3.0",
+        "implementation_version": "1",
+        "description": "XV Driver FPS Monitor Layer",
+        "functions": {
+            "vkGetInstanceProcAddr": "xv_vkGetInstanceProcAddr",
+            "vkGetDeviceProcAddr": "xv_vkGetDeviceProcAddr"
+        }
+    }
+}
