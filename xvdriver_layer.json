@@ -1,0 +1,17 @@
+{
+    "file_format_version": "1.0.0",
+    "layer": {
+        "name": "VK_LAYER_XVDRIVER_xvdriver",
+        "type": "GLOBAL",
+        "library_path": "C:\\Users\\mr795\\OneDrive\\Documentos\\Projeto\\xvdriver\\bin\\xvdriver.dll",
+        "api_version": "1.4.335",
+        "implementation_version": "1",
+        "description": "XVDriver Vulkan Implicit Layer",
+        "functions": {
+            "vkGetInstanceProcAddr": "vkGetInstanceProcAddr",
+            "vkGetDeviceProcAddr": "vkGetDeviceProcAddr"
+        },
+        "enable_environment": { "ENABLE_XVDRIVER": "1" },
+        "disable_environment": { "DISABLE_XVDRIVER": "1" }
+    }
+}

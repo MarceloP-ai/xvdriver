@@ -1,0 +1,14 @@
+{
+  "file_format_version": "1.2.0",
+  "layer": {
+    "name": "VK_LAYER_XVDRIVER_xvdriver",
+    "type": "GLOBAL",
+    "library_path": "C:\\Projeto\\xvdriver\\layer\\xvdriver.dll",
+    "api_version": "1.4.335",
+    "implementation_version": 1,
+    "description": "XVDriver Vulkan Implicit Layer",
+    "disable_environment": {
+      "VK_LAYER_XVDRIVER_DISABLE": ""
+    }
+  }
+}

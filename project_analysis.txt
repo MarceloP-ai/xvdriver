@@ -1,0 +1,115 @@
+﻿=== ANÁLISE DO PROJETO XVDRIVER VULKAN ===
+Data: 01/21/2026 22:19:43
+
+=== 1. CONFIGURAÇÃO DE BUILD ===
+cmake_minimum_required(VERSION 3.10)
+project(xvdriver)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+include_directories(include)
+add_library(xvdriver SHARED src/vk_wrapper.cpp xvdriver.def)
+find_package(Vulkan REQUIRED)
+target_link_libraries(xvdriver PRIVATE Vulkan::Vulkan)
+
+=== 2. ARQUIVO .def (EXPORTS) ===
+LIBRARY xvdriver
+EXPORTS
+    vkGetInstanceProcAddr
+    vkGetDeviceProcAddr
+
+=== 3. ARQUIVO LAYER JSON ===
+{
+    "file_format_version": "1.0.0",
+    "layer": {
+        "name": "VK_LAYER_XVDRIVER_xvdriver",
+        "type": "GLOBAL",
+        "library_path": "C:\\Users\\mr795\\OneDrive\\Documentos\\Projeto\\xvdriver\\bin\\xvdriver.dll",
+        "api_version": "1.4.335",
+        "implementation_version": "1",
+        "description": "XVDriver Vulkan Implicit Layer",
+        "functions": {
+            "vkGetInstanceProcAddr": "vkGetInstanceProcAddr",
+            "vkGetDeviceProcAddr": "vkGetDeviceProcAddr"
+        },
+        "enable_environment": { "ENABLE_XVDRIVER": "1" },
+        "disable_environment": { "DISABLE_XVDRIVER": "1" }
+    }
+}
+
+
+=== 4. ARQUIVOS PRINCIPAIS DO SRC ===
+
+--- command_buffer_dispatch.cpp (3269 bytes) --- #include "command_buffer_dispatch.h" #include <unordered_map> #include <mutex>  /* ------------------------------------------------------------------------- */ /* Dispatch table                                                             */ /* ------------------------------------------------------------------------- */  struct CommandBufferDispatch {     PFN_vkCmdDraw        CmdDraw;     PFN_vkCmdDrawIndexed CmdDrawIndexed;     PFN_vkCmdDispatch    CmdDispatch; };  static std::unordered_map<VkCommandBuffer, CommandBufferDispatch> g_dispatch; static std::mutex g_mutex;  /* ------------------------------------------------------------------------- */ /* Init                                                                       */ /* ------------------------------------------------------------------------- */  void xv_init_command_buffer_dispatch(     VkCommandBuffer commandBuffer,     PFN_vkGetDeviceProcAddr gdpa) {     std::lock_guard<std::mutex> lock(g_mutex);      CommandBufferDispatch table{};     table.CmdDraw = (PFN_vkCmdDraw)         gdpa(VK_NULL_HANDLE, "vkCmdDraw");      table.CmdDrawIndexed = (PFN_vkCmdDrawIndexed)         gdpa(VK_NULL_HANDLE, "vkCmdDrawIndexed");      table.CmdDispatch = (PFN_vkCmdDispatch)         gdpa(VK_NULL_HANDLE, "vkCmdDispatch");      g_dispatch[commandBuffer] = table; }  /* ------------------------------------------------------------------------- */ /* Helpers                                                                    */ /* ------------------------------------------------------------------------- */  static CommandBufferDispatch* get_dispatch(VkCommandBuffer cb) {     auto it = g_dispatch.find(cb);     if (it == g_dispatch.end())         return nullptr;     return &it->second; 
+--- device_dispatch.cpp (1326 bytes) --- #include "device_dispatch.h" #include <unordered_map>  static std::unordered_map<VkDevice, DeviceDispatchTable> g_device_tables; static std::unordered_map<VkQueue, VkDevice> g_queue_to_device;  void xv_init_device_dispatch(VkDevice device, PFN_vkGetDeviceProcAddr gdpa) {     DeviceDispatchTable table = {};     table.GetDeviceProcAddr = gdpa;     #define LOAD_FN(name) table.name = (PFN_vk##name)gdpa(device, "vk" #name)     LOAD_FN(CreateSwapchainKHR);     LOAD_FN(GetSwapchainImagesKHR);     LOAD_FN(CreateBuffer);     LOAD_FN(GetBufferMemoryRequirements);     LOAD_FN(AllocateMemory);     LOAD_FN(BindBufferMemory);     LOAD_FN(MapMemory);     LOAD_FN(CreateCommandPool);     LOAD_FN(AllocateCommandBuffers);     LOAD_FN(BeginCommandBuffer);     LOAD_FN(EndCommandBuffer);     LOAD_FN(CmdPipelineBarrier);     LOAD_FN(CmdCopyBufferToImage);     LOAD_FN(QueueSubmit);     LOAD_FN(QueuePresentKHR);     LOAD_FN(ResetCommandPool);     LOAD_FN(QueueWaitIdle);     g_device_tables[device] = table; }  DeviceDispatchTable* xv_get_device_dispatch(VkDevice device) {     return &g_device_tables[device]; }  void xv_set_queue_mapping(VkQueue queue, VkDevice device) {     g_queue_to_device[queue] = device; }  DeviceDispatchTable* xv_get_queue_dispatch(VkQueue queue) {     return &g_device_tables[g_queue_to_device[queue]]; } 
+--- instance_dispatch.cpp (679 bytes) --- #include "instance_dispatch.h" #include <unordered_map>  static std::unordered_map<VkInstance, InstanceDispatchTable> g_instance_tables;  void xv_init_instance_dispatch(VkInstance instance, PFN_vkGetInstanceProcAddr gipa) {     InstanceDispatchTable table = {};     table.GetInstanceProcAddr = gipa;     table.GetPhysicalDeviceMemoryProperties = (PFN_vkGetPhysicalDeviceMemoryProperties)gipa(instance, "vkGetPhysicalDeviceMemoryProperties");     g_instance_tables[instance] = table; }  InstanceDispatchTable* xv_get_instance_dispatch(VkInstance instance) {     auto it = g_instance_tables.find(instance);     return (it != g_instance_tables.end()) ? &it->second : nullptr; } 
+--- bc_texture_support.cpp (0 bytes) --- 
+--- extension_filter.cpp (0 bytes) --- 
+--- feature_mask.cpp (960 bytes) --- #include <vulkan/vulkan.h> #include <cstring>  void xv_mask_device_features(     VkDeviceCreateInfo& createInfo,     VkPhysicalDeviceFeatures& featuresOut) {      if (createInfo.pEnabledFeatures) {         featuresOut = *createInfo.pEnabledFeatures;     } else {         std::memset(&featuresOut, 0, sizeof(featuresOut));     }      /* ---------------------------------------------------------- */     /*  SAFE FEATURES (DXVK / EMULATORS FRIENDLY)                 */     /* ---------------------------------------------------------- */      featuresOut.samplerAnisotropy = VK_TRUE;     featuresOut.shaderClipDistance = VK_TRUE;     featuresOut.shaderCullDistance = VK_TRUE;     featuresOut.textureCompressionBC = VK_TRUE;      /* âš ï¸ NÃƒO force geometry/tessellation (crash em mobile) */     featuresOut.geometryShader = VK_FALSE;     featuresOut.tessellationShader = VK_FALSE;      createInfo.pEnabledFeatures = &featuresOut; } 
+--- portability_subset.cpp (0 bytes) --- 
+--- xv_loader.cpp (1509 bytes) --- #include "xv_loader.h" #include "vk_dispatch_table.h" #include <vulkan/vulkan.h> #include <mutex>  static std::once_flag initFlag;  // Ponteiro para vkGetInstanceProcAddr original PFN_vkGetInstanceProcAddr real_vkGetInstanceProcAddr = nullptr;  // Dispatch table InstanceDispatchTable instanceDispatch = {0};  static void loadRealVulkan() {     real_vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)          vkGetInstanceProcAddr(nullptr, "vkGetInstanceProcAddr"); }  // O nosso interceptor principal VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xvGetInstanceProcAddr(         VkInstance instance,         const char* pName) {      std::call_once(initFlag, loadRealVulkan);      // Se for pedido nosso interceptor â†’ devolve     if (strcmp(pName, "vkGetInstanceProcAddr") == 0) {         return (PFN_vkVoidFunction)xvGetInstanceProcAddr;     }     if (strcmp(pName, "vkGetDeviceProcAddr") == 0) {         return (PFN_vkVoidFunction)xvGetDeviceProcAddr;     }      // Intercepte aqui chamadas especÃ­ficas     if (strcmp(pName, "vkCreateInstance") == 0) {         return (PFN_vkVoidFunction)real_vkGetInstanceProcAddr(instance, "vkCreateInstance");     }      // SenÃ£o, use a funÃ§Ã£o real     return real_vkGetInstanceProcAddr(instance, pName); }  VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xvGetDeviceProcAddr(         VkDevice device,         const char* pName) {      if (instanceDispatch.vkGetDeviceProcAddr) {         return instanceDispatch.vkGetDeviceProcAddr(device, pName);     }     return nullptr; 
+--- logger.cpp (354 bytes) --- #include "logger.h" #include <fstream>  extern "C" void xv_log(const char* message) {     std::ofstream log_file("C:\\Users\\mr795\\OneDrive\\Documentos\\Projeto\\xvdriver\\bin\\xv_log.txt", std::ios::app);     if (log_file.is_open()) {         log_file << "[XV] " << message << std::endl;         log_file.flush();         log_file.close();     } } 
+--- vk_smoke_test.cpp (0 bytes) --- 
+--- layer_exports.cpp (473 bytes) --- #include <vulkan/vulkan.h>  extern "C" {  VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(     VkNegotiateLayerInterface *pVersionStruct) {     if (!pVersionStruct || pVersionStruct->sType != LAYER_NEGOTIATE_INTERFACE_STRUCT)         return VK_ERROR_INITIALIZATION_FAILED;      if (pVersionStruct->loaderLayerInterfaceVersion > 2)         pVersionStruct->loaderLayerInterfaceVersion = 2;      return VK_SUCCESS; }  } 
+--- vk_wrapper.cpp (1329 bytes) --- #include <vulkan/vulkan.h> #include <vulkan/vk_layer.h> #include <iostream> #include <cstring>  // FunÃ§Ã£o de apoio (hook) VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateInstance(const VkInstanceCreateInfo* pCI, const VkAllocationCallbacks* pA, VkInstance* pI) {     std::cout << "\n\n[XVDriver] SUCESSO: LAYER INJETADA!\n\n" << std::endl;     VkLayerInstanceCreateInfo* ci = (VkLayerInstanceCreateInfo*)pCI->pNext;     while (ci && !(ci->sType == VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO && ci->function == VK_LAYER_LINK_INFO)) {         ci = (VkLayerInstanceCreateInfo*)ci->pNext;     }     if (!ci) return VK_ERROR_INITIALIZATION_FAILED;     PFN_vkGetInstanceProcAddr nextGipa = ci->u.pLayerInfo->pfnNextGetInstanceProcAddr;     ci->u.pLayerInfo = ci->u.pLayerInfo->pNext;     PFN_vkCreateInstance nextCreate = (PFN_vkCreateInstance)nextGipa(VK_NULL_HANDLE, "vkCreateInstance");     return nextCreate(pCI, pA, pI); }  // FunÃ§Ãµes padrÃ£o da Layer extern "C" {     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetInstanceProcAddr(VkInstance inst, const char* name) {         if (strcmp(name, "vkCreateInstance") == 0) return (PFN_vkVoidFunction)xv_vkCreateInstance;         return nullptr;     }      VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetDeviceProcAddr(VkDevice dev, const char* name) {         return nullptr;     } }
+
+=== 5. ESTRUTURA DE DISPATCH ===
+
+--- command_buffer_dispatch.cpp --- #include "command_buffer_dispatch.h" #include <unordered_map> #include <mutex>  /* ------------------------------------------------------------------------- */ /* Dispatch table                                                             */ /* ------------------------------------------------------------------------- */  struct CommandBufferDispatch {     PFN_vkCmdDraw        CmdDraw;     PFN_vkCmdDrawIndexed CmdDrawIndexed;     PFN_vkCmdDispatch    CmdDispatch; };  static std::unordered_map<VkCommandBuffer, CommandBufferDispatch> g_dispatch; static std::mutex g_mutex;  /* ------------------------------------------------------------------------- */ /* Init                                                                       */ /* ------------------------------------------------------------------------- */  void xv_init_command_buffer_dispatch(     VkCommandBuffer commandBuffer,     PFN_vkGetDeviceProcAddr gdpa) {     std::lock_guard<std::mutex> lock(g_mutex);      CommandBufferDispatch table{};     table.CmdDraw = (PFN_vkCmdDraw)         gdpa(VK_NULL_HANDLE, "vkCmdDraw"); 
+--- device_dispatch.cpp --- #include "device_dispatch.h" #include <unordered_map>  static std::unordered_map<VkDevice, DeviceDispatchTable> g_device_tables; static std::unordered_map<VkQueue, VkDevice> g_queue_to_device;  void xv_init_device_dispatch(VkDevice device, PFN_vkGetDeviceProcAddr gdpa) {     DeviceDispatchTable table = {};     table.GetDeviceProcAddr = gdpa;     #define LOAD_FN(name) table.name = (PFN_vk##name)gdpa(device, "vk" #name)     LOAD_FN(CreateSwapchainKHR);     LOAD_FN(GetSwapchainImagesKHR);     LOAD_FN(CreateBuffer);     LOAD_FN(GetBufferMemoryRequirements);     LOAD_FN(AllocateMemory);     LOAD_FN(BindBufferMemory);     LOAD_FN(MapMemory);     LOAD_FN(CreateCommandPool);     LOAD_FN(AllocateCommandBuffers);     LOAD_FN(BeginCommandBuffer);     LOAD_FN(EndCommandBuffer);     LOAD_FN(CmdPipelineBarrier);     LOAD_FN(CmdCopyBufferToImage);     LOAD_FN(QueueSubmit);     LOAD_FN(QueuePresentKHR);     LOAD_FN(ResetCommandPool);     LOAD_FN(QueueWaitIdle);     g_device_tables[device] = table; }  
+--- instance_dispatch.cpp --- #include "instance_dispatch.h" #include <unordered_map>  static std::unordered_map<VkInstance, InstanceDispatchTable> g_instance_tables;  void xv_init_instance_dispatch(VkInstance instance, PFN_vkGetInstanceProcAddr gipa) {     InstanceDispatchTable table = {};     table.GetInstanceProcAddr = gipa;     table.GetPhysicalDeviceMemoryProperties = (PFN_vkGetPhysicalDeviceMemoryProperties)gipa(instance, "vkGetPhysicalDeviceMemoryProperties");     g_instance_tables[instance] = table; }  InstanceDispatchTable* xv_get_instance_dispatch(VkInstance instance) {     auto it = g_instance_tables.find(instance);     return (it != g_instance_tables.end()) ? &it->second : nullptr; }
+
+=== 6. HEADERS IMPORTANTES ===
+
+--- logger.h --- #include "logger.h"  #ifdef __ANDROID__ #include <android/log.h> void Logger::info(const char* msg) {     __android_log_print(ANDROID_LOG_INFO, "XVDriver", "%s", msg); } #else #include <iostream> void Logger::info(const char* msg) {     std::cout << "[XVDriver] " << msg << std::endl; } #endif 
+--- vk_extensions.h --- #pragma once  #include <vulkan/vulkan.h>  // Namespace para organizar funÃ§Ãµes de extensÃ£o namespace vk_ext {      // Verifica se uma extensÃ£o estÃ¡ presente na lista de dispositivos     bool isExtensionSupported(         const VkPhysicalDevice& device,         const char* extensionName     );      // Habilita e retorna/gera a lista de extensÃµes que vocÃª quer forÃ§ar     VkResult getEnabledExtensions(         const VkPhysicalDevice& device,         uint32_t* pCount,         const char** ppExtensions     );  
+--- vk_wrapper.h --- #pragma once  #include <vulkan/vulkan.h>  #ifdef __cplusplus extern "C" { #endif  // Inicializa o wrapper e carrega o driver Vulkan real void xv_init_vulkan_loader(void);  // Interceptador principal VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName);  // Ponteiro real (driver do sistema) extern PFN_vkGetInstanceProcAddr real_vkGetInstanceProcAddr;  #ifdef __cplusplus } 
+--- xvdriver.h --- #pragma once  // xvdriver â€” definitions and common includes  // Vulkan API loader intercept #include <vulkan/vulkan.h>  // Initialize the XVDriver (to be called when loaded) namespace xvdriver {  // Called once at load or early initialization bool initialize();  // Called once at shutdown (if needed) void shutdown();  } // namespace xvdriver
+
+=== 7. ARQUIVOS DE LOG (últimas 20 linhas) ===
+
+--- vulkan_log.txt ---
+
+=== 8. SCRIPT DE BUILD ===
+
+--- build_and_setup.ps1 --- # build_and_setup.ps1 # Script para compilar e registrar a Vulkan layer XVDriver no Windows  # Caminhos $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path $BuildDir = Join-Path $ProjectRoot "build" $LayerDir = Join-Path $ProjectRoot "layer"  Write-Host "`n=== XVDriver Build & Setup ===`n"  # 1ï¸âƒ£ Limpar build antigo if (Test-Path $BuildDir) {     Write-Host "Limpando pasta build..."     Remove-Item $BuildDir -Recurse -Force } # Criar build Write-Host "Criando pasta build..." New-Item -ItemType Directory -Path $BuildDir | Out-Null  # 2ï¸âƒ£ Gerar build com CMake Write-Host "`nExecutando CMake..." Push-Location $BuildDir cmake .. | Write-Host  # 3ï¸âƒ£ Compilar a layer Write-Host "`nCompilando XVDriver..." cmake --build . | Write-Host  # 4ï¸âƒ£ Copiar DLL para layer # Procurar a DLL gerada dentro da pasta de build (Debug/Release) $DllFile = Get-ChildItem -Path $BuildDir -Recurse -Filter "xvdriver.dll" | Select-Object -First 1  if ($DllFile -eq $null) {     Write-Error "âŒ DLL nÃ£o encontrada apÃ³s a compilaÃ§Ã£o!"     exit 1 }  if (-Not (Test-Path $LayerDir)) {     Write-Host "Criando pasta layer..."     New-Item -ItemType Directory -Path $LayerDir | Out-Null }  $DllTarget = Join-Path $LayerDir "xvdriver.dll" Write-Host "`nCopiando $($DllFile.FullName) para $DllTarget ..." Copy-Item -Path $DllFile.FullName -Destination $DllTarget -Force    # 5ï¸âƒ£ Configurar variÃ¡vel de ambiente para a sessÃ£o atual $Env:VK_LAYER_PATH = $LayerDir
+
+=== 9. INFORMAÇÕES DO DLL ATUAL ===
+Tamanho: 12288 bytes Data: 01/20/2026 21:38:35
+
+=== 10. ESTRUTURA COMPLETA (resumida) ===
+
+Name                   Directory                                               
+----                   ---------                                               
+build_and_setup.ps1    C:\Projeto\xvdriver                                     
+CMakeLists.txt         C:\Projeto\xvdriver                                     
+LICENSE.txt            C:\Projeto\xvdriver                                     
+loader_debug.txt       C:\Projeto\xvdriver                                     
+reset_env.ps1          C:\Projeto\xvdriver                                     
+vulkan_log.txt         C:\Projeto\xvdriver                                     
+write_layer_json.ps1   C:\Projeto\xvdriver                                     
+xvdriver.def           C:\Projeto\xvdriver                                     
+xvdriver_layer.json    C:\Projeto\xvdriver                                     
+xvdriver_layer.json    C:\Projeto\xvdriver\bin                                 
+xv_layer.json          C:\Projeto\xvdriver\bin                                 
+xv_log.txt             C:\Projeto\xvdriver\bin                                 
+xvdriver_layer.json    C:\Projeto\xvdriver\bin\Release                         
+CMakeCache.txt         C:\Projeto\xvdriver\build                               
+InstallScripts.json    C:\Projeto\xvdriver\build\CMakeFiles                    
+TargetDirectories.txt  C:\Projeto\xvdriver\build\CMakeFiles                    
+VCTargetsPath.txt      C:\Projeto\xvdriver\build\CMakeFiles\4.2.1              
+CMakeCCompilerId.c     C:\Projeto\xvdriver\build\CMakeFiles\4.2.1\CompilerIdC  
+CMakeCXXCompilerId.cpp C:\Projeto\xvdriver\build\CMakeFiles\4.2.1\CompilerIdCXX
+logger.h               C:\Projeto\xvdriver\include                             
+vk_extensions.h        C:\Projeto\xvdriver\include                             
+vk_wrapper.h           C:\Projeto\xvdriver\include                             
+xvdriver.h             C:\Projeto\xvdriver\include                             
+xvdriver_layer.json    C:\Projeto\xvdriver\layer                               
+font_atlas.h           C:\Projeto\xvdriver\src                                 
+layer_exports.cpp      C:\Projeto\xvdriver\src                                 
+vk_wrapper.cpp         C:\Projeto\xvdriver\src                                 
+vk_wrapper.h           C:\Projeto\xvdriver\src                                 
+device_dispatch.cpp    C:\Projeto\xvdriver\src\dispatch                        
+device_dispatch.h      C:\Projeto\xvdriver\src\dispatch                        
+
+
+

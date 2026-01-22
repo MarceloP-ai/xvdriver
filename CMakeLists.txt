@@ -1,0 +1,8 @@
+﻿cmake_minimum_required(VERSION 3.10)
+project(xvdriver)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+include_directories(include)
+add_library(xvdriver SHARED src/vk_wrapper.cpp xvdriver.def)
+find_package(Vulkan REQUIRED)
+target_link_libraries(xvdriver PRIVATE Vulkan::Vulkan)

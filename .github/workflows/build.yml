@@ -1,0 +1,28 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [created]
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Android NDK
+      uses: android-actions/setup-ndk@v2
+      with:
+        ndk: "25.2.9519653"
+    - name: Build Android
+      run: bash tools/build_android.sh
+
+    - name: Upload driver
+      uses: actions/upload-artifact@v2
+      with:
+        name: xvdriver-android-arm64
+        path: build/libxvdriver.so
