@@ -45,6 +45,7 @@ extern "C" {
     }
 }
 
+
 extern "C" VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
     if (pVersionStruct->loader_layer_interface_version >= 2) {
         pVersionStruct->loader_layer_interface_version = 2;
@@ -54,3 +55,6 @@ extern "C" VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion
     }
     return VK_SUCCESS;
 }
+    return VK_SUCCESS;
+}
+
