@@ -1,8 +1,16 @@
 # ninja log v7
-51	2028	7910729725304762	CMakeFiles/xvdriver.dir/src/imgui/imgui_impl_vulkan.cpp.o	f19783505302fcfa
-16	3050	7910729724927880	CMakeFiles/xvdriver.dir/src/vk_wrapper.cpp.o	26c3c0bdcc0d0695
-43	3415	7910729725227040	CMakeFiles/xvdriver.dir/src/imgui/imgui_tables.cpp.o	568ae7766bc9630
-36	6802	7910729725166793	CMakeFiles/xvdriver.dir/src/imgui/imgui_widgets.cpp.o	c71f912d276129ec
-29	8076	7910729725086463	CMakeFiles/xvdriver.dir/src/imgui/imgui_draw.cpp.o	663c27448e263f1a
-22	12217	7910729724927880	CMakeFiles/xvdriver.dir/src/imgui/imgui.cpp.o	be9c27d6f710121e
-12217	12406	7910729846874288	libxvdriver.so	f2f13af9ea92d3f9
+53	2202	7910747712418570	CMakeFiles/xvdriver.dir/src/imgui/imgui_impl_vulkan.cpp.o	f19783505302fcfa
+46	3652	7910747712338246	CMakeFiles/xvdriver.dir/src/imgui/imgui_tables.cpp.o	568ae7766bc9630
+39	7404	7910747712260535	CMakeFiles/xvdriver.dir/src/imgui/imgui_widgets.cpp.o	c71f912d276129ec
+32	8242	7910747712200299	CMakeFiles/xvdriver.dir/src/imgui/imgui_draw.cpp.o	663c27448e263f1a
+25	12521	7910747712140043	CMakeFiles/xvdriver.dir/src/imgui/imgui.cpp.o	be9c27d6f710121e
+30	1133	7910749044483838	CMakeFiles/xvdriver.dir/src/vk_wrapper.cpp.o	26c3c0bdcc0d0695
+1137	1256	7910749055588027	libxvdriver.so	f2f13af9ea92d3f9
+23	36	7910749434383126	clean	f65c4da84c683042
+56	1797	7910749435231498	CMakeFiles/xvdriver.dir/src/imgui/imgui_impl_vulkan.cpp.o	f19783505302fcfa
+21	2906	7910749434818390	CMakeFiles/xvdriver.dir/src/vk_wrapper.cpp.o	26c3c0bdcc0d0695
+48	3343	7910749435151145	CMakeFiles/xvdriver.dir/src/imgui/imgui_tables.cpp.o	568ae7766bc9630
+41	6865	7910749435073425	CMakeFiles/xvdriver.dir/src/imgui/imgui_widgets.cpp.o	c71f912d276129ec
+34	7894	7910749434993073	CMakeFiles/xvdriver.dir/src/imgui/imgui_draw.cpp.o	663c27448e263f1a
+26	12322	7910749434913661	CMakeFiles/xvdriver.dir/src/imgui/imgui.cpp.o	be9c27d6f710121e
+12322	12430	7910749557882257	libxvdriver.so	f2f13af9ea92d3f9
