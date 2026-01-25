@@ -1,18 +1,18 @@
-# Xclipse Vulkan Enhanced Driver (XV-Driver)
+﻿# XVDriver - Vulkan FPS Monitor Layer
 
-Driver Vulkan customizado para GPUs **Samsung Xclipse (Exynos 2400+)**
+Protótipo de uma Vulkan Layer desenvolvida em C++ para interceptação de comandos de renderização e monitoramento de performance.
 
-## Features
+## 🛠️ Especificações Técnicas
+- **Linguagem:** C++17
+- **API:** Vulkan SDK 1.3+
+- **Hooking:** Interceptação da função `vkQueuePresentKHR` para cálculo de FPS.
+- **Negotiation:** Implementação manual de `vkNegotiateLoaderLayerInterfaceVersion` para integração com o Vulkan Loader.
 
-✔ Suporte a extensões Vulkan expandido  
-✔ Sistema de perfis por aplicativo  
-✔ Fallback OpenGL→Vulkan (via Zink, futuro)  
-✔ Workarounds para bugs de drivers upstream  
-✔ Sistema de logging e HUD
+## 🚀 Desafios Resolvidos
+- **Pointer Casting:** Ajuste na negociação de interface para compatibilidade com o Loader (uint32_t casting).
+- **Dispatch Chain:** Lógica de salvamento de ponteiros originais (Function Hooking).
+- **Registry Management:** Configuração de camadas explícitas via Registro do Windows (HKLM/HKCU).
 
-## Build
-
-### Android
-```bash
-export ANDROID_NDK_HOME=/path/to/android/ndk
-bash tools/build_android.sh
+## 📂 Estrutura
+- `src/vk_wrapper.cpp`: Lógica principal da layer e hooks.
+- `bin/xvdriver.json`: Manifesto de configuração para o Vulkan.
