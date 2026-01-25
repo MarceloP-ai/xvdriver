@@ -38,16 +38,27 @@ PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 PFN_vkCmdSetViewport g_pfnCmdSetViewport = nullptr;
 
-// Helper para mascarar as propriedades
 void MaskProperties(VkPhysicalDeviceProperties* props) {
-    props->vendorID = 0x5143; // Qualcomm
+    props->vendorID = 0x5143; 
     props->deviceID = 0x41445245; 
     props->driverVersion = VK_MAKE_VERSION(512, 744, 0);
+    memset(props->deviceName, 0, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE);
     strncpy(props->deviceName, g_Overlay.maskedGpuName, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE);
 }
 
 extern "C" {
-    // 1. SUPER SPOOFING: Intercepta as duas versões da função de propriedades
+    // 1. DEEP SPOOF: Intercepta a listagem de GPUs
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkEnumeratePhysicalDevices(VkInstance instance, uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) {
+        PFN_vkEnumeratePhysicalDevices pfn = (PFN_vkEnumeratePhysicalDevices)g_pfnGetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices");
+        VkResult res = pfn(instance, pPhysicalDeviceCount, pPhysicalDevices);
+        
+        if (res == VK_SUCCESS && pPhysicalDevices && pPhysicalDeviceCount && *pPhysicalDeviceCount > 0) {
+            g_Overlay.physDevice = pPhysicalDevices[0];
+            LOGI("XVDriver: Physical Device Intercepted");
+        }
+        return res;
+    }
+
     VKAPI_ATTR void VKAPI_CALL xv_vkGetPhysicalDeviceProperties(VkPhysicalDevice phys, VkPhysicalDeviceProperties* pProps) {
         PFN_vkGetPhysicalDeviceProperties pfn = (PFN_vkGetPhysicalDeviceProperties)g_pfnGetInstanceProcAddr(g_Overlay.instance, "vkGetPhysicalDeviceProperties");
         pfn(phys, pProps);
@@ -82,23 +93,16 @@ extern "C" {
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame(); ImGui::NewFrame();
-            ImGui::SetNextWindowPos(ImVec2(60, 60), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowPos(ImVec2(60, 150), ImGuiCond_Always);
             ImGui::Begin("XVD_ELITE", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            ImGui::TextColored(ImVec4(0,1,0,1), "GPU: %s", g_Overlay.maskedGpuName);
-            ImGui::Text("Render: %dx%d (%.0f%%)", g_Overlay.width, g_Overlay.height, SCALE_FACTOR * 100);
+            ImGui::TextColored(ImVec4(0,1,0,1), "Active GPU: %s", g_Overlay.maskedGpuName);
+            ImGui::Text("Internal Res: %dx%d", g_Overlay.width, g_Overlay.height);
             ImGui::TextColored(ImVec4(1,1,0,1), "FPS: %.1f", g_Overlay.fps);
             ImGui::End(); ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
             g_FrameReady = false;
         }
         g_pfnCmdEndRenderPass(commandBuffer);
-    }
-
-    // Inicialização do ImGui e Hooks
-    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
-        VkResult res = g_pfnCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
-        if (res == VK_SUCCESS) { g_Overlay.renderPass = *pRenderPass; /* SetupImGui aqui */ }
-        return res;
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
@@ -122,6 +126,7 @@ extern "C" {
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
         std::string n = pName;
+        if (n == "vkEnumeratePhysicalDevices") return (PFN_vkVoidFunction)xv_vkEnumeratePhysicalDevices;
         if (n == "vkGetPhysicalDeviceProperties") return (PFN_vkVoidFunction)xv_vkGetPhysicalDeviceProperties;
         if (n == "vkGetPhysicalDeviceProperties2") return (PFN_vkVoidFunction)xv_vkGetPhysicalDeviceProperties2;
         if (n == "vkCreateSwapchainKHR") {
