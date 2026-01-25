@@ -39,7 +39,8 @@ void SetupImGui() {
     if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE || g_Overlay.device == VK_NULL_HANDLE) return;
 
     VkDescriptorPoolSize pool_sizes[] = { { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 } };
-    VkDescriptorPoolCreateInfo pool_info = { VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO };
+    VkDescriptorPoolCreateInfo pool_info = {};
+    pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
     pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
@@ -48,17 +49,8 @@ void SetupImGui() {
 
     ImGui::CreateContext();
     
-    // Inicialização por posição (Braced Initializer) para evitar erro de membro/espaço
     ImGui_ImplVulkan_InitInfo ii = {};
-    ii.Instance = VK_NULL_HANDLE;
-    ii.PhysicalDevice = g_Overlay.physDevice;
-    ii.Device = g_Overlay.device;
-    ii.Queue = g_Overlay.graphicsQueue;
-    ii.DescriptorPool = g_Overlay.descriptorPool;
-    ii.MinImageCount = 2;
-    ii.ImageCount = 3;
-    ii.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    ii.RenderPass = g_Overlay.renderPass;
+    ii.Instance=VK_NULL_HANDLE;ii.PhysicalDevice=g_Overlay.physDevice;ii.Device=g_Overlay.device;ii.Queue=g_Overlay.graphicsQueue;ii.DescriptorPool=g_Overlay.descriptorPool;ii.MinImageCount=2;ii.ImageCount=3;ii.MSAASamples=VK_SAMPLE_COUNT_1_BIT;ii.RenderPass=g_Overlay.renderPass;
 
     ImGui_ImplVulkan_Init(&ii);
     g_Overlay.isInitialized = true;
