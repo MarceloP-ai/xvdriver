@@ -20,7 +20,7 @@ OverlayContext g_Overlay;
 PFN_vkQueuePresentKHR g_pfnNextQueuePresent = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnNextCreateSwapchain = nullptr;
 PFN_vkCreateRenderPass g_pfnNextCreateRenderPass = nullptr;
-PFN_vkEndCommandBuffer g_pfnNextEndCommandBuffer = nullptr;
+PFN_vkCmdEndRenderPass g_pfnNextCmdEndRenderPass = nullptr;
 
 void UpdateFPS() {
     static auto lastTime = std::chrono::high_resolution_clock::now();
@@ -37,54 +37,54 @@ void UpdateFPS() {
 
 void SetupImGui() {
     if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE || g_Overlay.device == VK_NULL_HANDLE) return;
-
-    VkDescriptorPoolSize pool_sizes[] = { { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 } };
-    VkDescriptorPoolCreateInfo pool_info = {};
-    pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-    pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+    
+    VkDescriptorPoolSize pool_sizes[] = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1}};
+    VkDescriptorPoolCreateInfo pool_info = {VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
     pool_info.pPoolSizes = pool_sizes;
     vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
-
-    ImGui::CreateContext();
     
+    ImGui::CreateContext();
     ImGui_ImplVulkan_InitInfo ii = {};
-    ii.Instance = VK_NULL_HANDLE;
     ii.PhysicalDevice = g_Overlay.physDevice;
     ii.Device = g_Overlay.device;
     ii.Queue = g_Overlay.graphicsQueue;
     ii.DescriptorPool = g_Overlay.descriptorPool;
     ii.MinImageCount = 2;
     ii.ImageCount = 3;
-    ii.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    ii.RenderPass = g_Overlay.renderPass;
-
+    
+    struct MemLayout { void* d[7]; VkSampleCountFlagBits msaa; VkRenderPass rp; };
+    MemLayout* l = (MemLayout*)&ii;
+    l->msaa = VK_SAMPLE_COUNT_1_BIT;
+    l->rp = g_Overlay.renderPass;
+    
     ImGui_ImplVulkan_Init(&ii);
     g_Overlay.isInitialized = true;
 }
 
 extern "C" {
-    VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) {
-            SetupImGui();
-        }
+    VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
-            ImGui::Begin("XVDriver", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
-            ImGui::Text("FPS: %.1f", g_Overlay.fps);
+            ImGui::SetNextWindowPos(ImVec2(10, 10));
+            ImGui::Begin("Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "FPS: %.1f", g_Overlay.fps);
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
         }
-        return g_pfnNextEndCommandBuffer(commandBuffer);
+        g_pfnNextCmdEndRenderPass(commandBuffer);
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
-        VkResult result = g_pfnNextCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
-        if (result == VK_SUCCESS) g_Overlay.renderPass = *pRenderPass;
-        return result;
+        VkResult res = g_pfnNextCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
+        if (res == VK_SUCCESS) { 
+            g_Overlay.renderPass = *pRenderPass; 
+            SetupImGui(); 
+        }
+        return res;
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
@@ -100,7 +100,7 @@ extern "C" {
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
         std::string n = pName;
-        if (n == "vkEndCommandBuffer") return (PFN_vkVoidFunction)xv_vkEndCommandBuffer;
+        if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
         if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
         if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
@@ -108,18 +108,13 @@ extern "C" {
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
-        std::string n = pName;
-        if (n == "vkEndCommandBuffer") return (PFN_vkVoidFunction)xv_vkEndCommandBuffer;
-        if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
-        if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
-        if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
-        if (n == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
+        if (std::string(pName) == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
         return nullptr;
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
-        pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
-        pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
+    VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* p) {
+        p->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
+        p->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
         return VK_SUCCESS;
     }
 }
