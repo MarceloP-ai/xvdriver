@@ -19,8 +19,6 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     
     char gpuName[256] = "Generic GPU";
-    VkPhysicalDeviceMemoryProperties memProperties;
-    
     bool isInitialized = false;
     float fps = 0.0f;
     float frameTime = 0.0f;
@@ -59,11 +57,9 @@ void UpdateMetrics() {
 void SetupImGui() {
     if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device) return;
 
-    // Obter info da GPU
     VkPhysicalDeviceProperties props;
     vkGetPhysicalDeviceProperties(g_Overlay.physDevice, &props);
     strncpy(g_Overlay.gpuName, props.deviceName, 256);
-    vkGetPhysicalDeviceMemoryProperties(g_Overlay.physDevice, &g_Overlay.memProperties);
 
     VkDescriptorPoolSize pool_sizes[] = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1}};
     VkDescriptorPoolCreateInfo pool_info = {VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
@@ -76,7 +72,7 @@ void SetupImGui() {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr;
-    io.FontGlobalScale = 2.0f; // Aumenta escala para telas de alta densidade (Android)
+    io.FontGlobalScale = 2.5f; // Fonte maior para Android
 
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = g_Overlay.instance;
@@ -104,16 +100,24 @@ extern "C" {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
             
-            ImGui::SetNextWindowPos(ImVec2(30, 30), ImGuiCond_FirstUseEver);
-            ImGui::Begin("XVDriver Pro", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            // Lógica de Cores Dinâmicas
+            ImVec4 statusColor;
+            if (g_Overlay.fps >= 55.0f) statusColor = ImVec4(0, 1, 0, 1);      // Verde
+            else if (g_Overlay.fps >= 30.0f) statusColor = ImVec4(1, 1, 0, 1); // Amarelo
+            else statusColor = ImVec4(1, 0, 0, 1);                           // Vermelho
+
+            ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
+            ImGui::Begin("XVDriver_Elite", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
             
-            ImGui::TextColored(ImVec4(0, 1, 0, 1), "GPU: %s", g_Overlay.gpuName);
+            ImGui::TextColored(statusColor, "GPU: %s", g_Overlay.gpuName);
             ImGui::Separator();
-            ImGui::Text("FPS: %.1f", g_Overlay.fps);
-            ImGui::Text("FrameTime: %.2f ms", g_Overlay.frameTime);
+            ImGui::TextColored(statusColor, "FPS: %.1f", g_Overlay.fps);
+            ImGui::Text("FT: %.2f ms", g_Overlay.frameTime);
             
             if (!g_Overlay.frameHistory.empty()) {
-                ImGui::PlotLines("##fps_graph", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 120, ImVec2(200, 40));
+                ImGui::PushStyleColor(ImGuiCol_PlotLines, statusColor);
+                ImGui::PlotLines("##graph", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 120, ImVec2(250, 50));
+                ImGui::PopStyleColor();
             }
 
             ImGui::End();
