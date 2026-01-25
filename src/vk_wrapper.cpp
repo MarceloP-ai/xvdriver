@@ -10,6 +10,8 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkDevice device = VK_NULL_HANDLE;
+    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+    VkQueue graphicsQueue = VK_NULL_HANDLE;
     bool isInitialized = false;
     float fps = 0.0f;
 };
@@ -34,7 +36,6 @@ void UpdateFPS() {
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
-        if (!g_pfnNextCreateRenderPass) return VK_ERROR_INITIALIZATION_FAILED;
         VkResult result = g_pfnNextCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
         if (result == VK_SUCCESS) g_Overlay.renderPass = *pRenderPass;
         return result;
@@ -42,12 +43,19 @@ extern "C" {
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
         g_Overlay.device = device;
-        if (!g_pfnNextCreateSwapchain) return VK_ERROR_INITIALIZATION_FAILED;
         return g_pfnNextCreateSwapchain(device, pCreateInfo, pAllocator, pSwapchain);
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
         UpdateFPS();
+        g_Overlay.graphicsQueue = queue;
+
+        // Se tivermos RenderPass e Device, o ImGui pode desenhar
+        if (g_Overlay.renderPass != VK_NULL_HANDLE && !g_Overlay.isInitialized) {
+            // Inicialização final do ImGui ocorreria aqui
+            g_Overlay.isInitialized = true;
+        }
+
         return g_pfnNextQueuePresent(queue, pPresentInfo);
     }
 
@@ -68,7 +76,6 @@ extern "C" {
         return nullptr;
     }
 
-    // Assinatura limpa para evitar conflito de linkage
     VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
         pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
         pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
