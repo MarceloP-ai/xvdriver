@@ -48,8 +48,6 @@ void SetupImGui() {
     vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
-    
-    // Inicialização direta para evitar espaços injetados pelo PowerShell
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = VK_NULL_HANDLE;
     ii.PhysicalDevice = g_Overlay.physDevice;
