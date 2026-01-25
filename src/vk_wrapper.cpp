@@ -4,6 +4,7 @@
 #include <imgui_impl_vulkan.h>
 #include <string>
 #include <chrono>
+#include <vector>
 
 #ifdef _WIN32
 #include <imgui_impl_win32.h>
@@ -16,16 +17,21 @@ struct OverlayContext {
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkQueue graphicsQueue = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
+    
+    char gpuName[256] = "Generic GPU";
+    VkPhysicalDeviceMemoryProperties memProperties;
+    
     bool isInitialized = false;
     float fps = 0.0f;
+    float frameTime = 0.0f;
     int frameCount = 0;
     std::chrono::time_point<std::chrono::high_resolution_clock> lastTime;
+    std::vector<float> frameHistory;
 };
 
 OverlayContext g_Overlay;
 bool g_FrameReady = false;
 
-// Ponteiros de função Vulkan
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkCreateDevice g_pfnCreateDevice = nullptr;
@@ -33,35 +39,44 @@ PFN_vkCmdEndRenderPass g_pfnCmdEndRenderPass = nullptr;
 PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
 PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 
-void UpdatePerformanceMetrics() {
+void UpdateMetrics() {
     g_Overlay.frameCount++;
     auto currentTime = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> elapsed = currentTime - g_Overlay.lastTime;
 
     if (elapsed.count() >= 0.5f) {
         g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
+        g_Overlay.frameTime = (elapsed.count() / g_Overlay.frameCount) * 1000.0f;
+        
+        g_Overlay.frameHistory.push_back(g_Overlay.fps);
+        if (g_Overlay.frameHistory.size() > 50) g_Overlay.frameHistory.erase(g_Overlay.frameHistory.begin());
+        
         g_Overlay.frameCount = 0;
         g_Overlay.lastTime = currentTime;
     }
 }
 
 void SetupImGui() {
-    if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device || !g_Overlay.physDevice) return;
+    if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device) return;
 
-    VkDescriptorPoolSize pool_sizes[] = {
-        { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 }
-    };
-    VkDescriptorPoolCreateInfo pool_info = { VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO };
+    // Obter info da GPU
+    VkPhysicalDeviceProperties props;
+    vkGetPhysicalDeviceProperties(g_Overlay.physDevice, &props);
+    strncpy(g_Overlay.gpuName, props.deviceName, 256);
+    vkGetPhysicalDeviceMemoryProperties(g_Overlay.physDevice, &g_Overlay.memProperties);
+
+    VkDescriptorPoolSize pool_sizes[] = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1}};
+    VkDescriptorPoolCreateInfo pool_info = {VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
     pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
     pool_info.pPoolSizes = pool_sizes;
-
-    if (vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool) != VK_SUCCESS) return;
+    vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-    io.IniFilename = nullptr; 
+    io.IniFilename = nullptr;
+    io.FontGlobalScale = 2.0f; // Aumenta escala para telas de alta densidade (Android)
 
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = g_Overlay.instance;
@@ -72,7 +87,6 @@ void SetupImGui() {
     ii.MinImageCount = 2;
     ii.ImageCount = 3;
 
-    // Ajuste de compatibilidade para versões do ImGui que não tem MSAASamples na struct
     struct MemLayout { void* d[7]; VkSampleCountFlagBits msaa; VkRenderPass rp; };
     MemLayout* l = (MemLayout*)&ii;
     l->msaa = VK_SAMPLE_COUNT_1_BIT;
@@ -90,17 +104,22 @@ extern "C" {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
             
-            ImGui::SetNextWindowPos(ImVec2(10, 10));
-            ImGui::Begin("XVDriver_Perf", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs);
+            ImGui::SetNextWindowPos(ImVec2(30, 30), ImGuiCond_FirstUseEver);
+            ImGui::Begin("XVDriver Pro", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
             
-            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "XVDriver High Performance");
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "GPU: %s", g_Overlay.gpuName);
+            ImGui::Separator();
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
+            ImGui::Text("FrameTime: %.2f ms", g_Overlay.frameTime);
             
+            if (!g_Overlay.frameHistory.empty()) {
+                ImGui::PlotLines("##fps_graph", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 120, ImVec2(200, 40));
+            }
+
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
-            
-            g_FrameReady = false; 
+            g_FrameReady = false;
         }
         g_pfnCmdEndRenderPass(commandBuffer);
     }
@@ -120,9 +139,9 @@ extern "C" {
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
-        UpdatePerformanceMetrics();
+        UpdateMetrics();
         g_Overlay.graphicsQueue = queue;
-        g_FrameReady = true; 
+        g_FrameReady = true;
         return g_pfnQueuePresent(queue, pPresentInfo);
     }
 
