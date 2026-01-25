@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver DEBUG v8",
-  "version": "5.0.0",
+  "name": "XVDriver System v9",
+  "version": "6.0.0",
   "author": "MarceloP-ai",
-  "description": "Extension Analytics + Swapchain Logger + LOD Bias 2.5"
+  "description": "Explicit Layer Hook + Anti-Crash + Dev-Log"
 }
