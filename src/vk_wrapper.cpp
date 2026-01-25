@@ -38,7 +38,7 @@ void UpdatePerformanceMetrics() {
     auto currentTime = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> elapsed = currentTime - g_Overlay.lastTime;
 
-    if (elapsed.count() >= 0.5f) { // Atualiza a cada 500ms para suavizar a leitura
+    if (elapsed.count() >= 0.5f) {
         g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
         g_Overlay.frameCount = 0;
         g_Overlay.lastTime = currentTime;
@@ -48,7 +48,6 @@ void UpdatePerformanceMetrics() {
 void SetupImGui() {
     if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device || !g_Overlay.physDevice) return;
 
-    // Pool de descritores otimizada para mobile
     VkDescriptorPoolSize pool_sizes[] = {
         { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 }
     };
@@ -62,7 +61,7 @@ void SetupImGui() {
 
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-    io.IniFilename = nullptr; // Evita IO de arquivo no Android para mais fluidez
+    io.IniFilename = nullptr; 
 
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = g_Overlay.instance;
@@ -72,9 +71,8 @@ void SetupImGui() {
     ii.DescriptorPool = g_Overlay.descriptorPool;
     ii.MinImageCount = 2;
     ii.ImageCount = 3;
-    ii.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
 
-    // Layout de memória compatível para evitar crashes de compilação
+    // Ajuste de compatibilidade para versões do ImGui que não tem MSAASamples na struct
     struct MemLayout { void* d[7]; VkSampleCountFlagBits msaa; VkRenderPass rp; };
     MemLayout* l = (MemLayout*)&ii;
     l->msaa = VK_SAMPLE_COUNT_1_BIT;
@@ -88,7 +86,6 @@ void SetupImGui() {
 
 extern "C" {
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
-        // Só renderiza o overlay se o frame estiver pronto e não houver conflito de shader
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
@@ -96,14 +93,14 @@ extern "C" {
             ImGui::SetNextWindowPos(ImVec2(10, 10));
             ImGui::Begin("XVDriver_Perf", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs);
             
-            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "XVDriver Performance Mode");
+            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "XVDriver High Performance");
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
             
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
             
-            g_FrameReady = false; // Consome o sinal de prontidão
+            g_FrameReady = false; 
         }
         g_pfnCmdEndRenderPass(commandBuffer);
     }
@@ -125,7 +122,7 @@ extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
         UpdatePerformanceMetrics();
         g_Overlay.graphicsQueue = queue;
-        g_FrameReady = true; // Sinaliza que o próximo passe pode receber o overlay
+        g_FrameReady = true; 
         return g_pfnQueuePresent(queue, pPresentInfo);
     }
 
