@@ -48,20 +48,17 @@ void SetupImGui() {
     init_info.DescriptorPool = g_Overlay.descriptorPool;
     init_info.MinImageCount = 2;
     init_info.ImageCount = 3;
-    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    init_info.RenderPass = g_Overlay.renderPass; // Na v1.90+ o RenderPass vai aqui
+    // Removidos membros problemáticos para teste inicial de compilação
+    // Se o RenderPass for obrigatório na sua versão, usaremos a assinatura de função antiga
 
-    ImGui_ImplVulkan_Init(&init_info); // Agora recebe apenas a struct
+    ImGui_ImplVulkan_Init(&init_info, g_Overlay.renderPass);
     
-    // Na versão nova, não é estritamente necessário chamar CreateFontsTexture manualmente 
-    // se usarmos as funções de NewFrame corretamente, mas vamos garantir.
-
     g_Overlay.isInitialized = true;
 }
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE) {
+        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) {
             SetupImGui();
         }
         
@@ -70,7 +67,7 @@ extern "C" {
             ImGui::NewFrame();
             ImGui::SetNextWindowPos(ImVec2(10, 10));
             ImGui::Begin("Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
-            ImGui::Text("XVDriver FPS: %.1f", g_Overlay.fps);
+            ImGui::Text("FPS: %.1f", g_Overlay.fps);
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
