@@ -38,7 +38,6 @@ void UpdateFPS() {
 void SetupImGui() {
     if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE || g_Overlay.device == VK_NULL_HANDLE) return;
 
-    // Criar Descriptor Pool necessário para o ImGui
     VkDescriptorPoolSize pool_sizes[] = { { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 } };
     VkDescriptorPoolCreateInfo pool_info = {};
     pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
@@ -49,7 +48,6 @@ void SetupImGui() {
     vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
-    
     ImGui_ImplVulkan_InitInfo init_info = {};
     init_info.Instance = VK_NULL_HANDLE;
     init_info.PhysicalDevice = g_Overlay.physDevice;
@@ -70,7 +68,6 @@ extern "C" {
         if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE && g_Overlay.graphicsQueue != VK_NULL_HANDLE) {
             SetupImGui();
         }
-        
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
