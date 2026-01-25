@@ -1,4 +1,4 @@
-﻿#include <vulkan/vulkan.h>
+#include <vulkan/vulkan.h>
 #include <vulkan/vk_layer.h>
 #include <imgui.h>
 #include <imgui_impl_vulkan.h>
@@ -48,18 +48,20 @@ void SetupImGui() {
     vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
-    ImGui_ImplVulkan_InitInfo init_info = {};
-    init_info.Instance = VK_NULL_HANDLE;
-    init_info.PhysicalDevice = g_Overlay.physDevice;
-    init_info.Device = g_Overlay.device;
-    init_info.Queue = g_Overlay.graphicsQueue;
-    init_info.DescriptorPool = g_Overlay.descriptorPool;
-    init_info.MinImageCount = 2;
-    init_info.ImageCount = 3;
-    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    init_info.RenderPass = g_Overlay.renderPass;
+    
+    // Inicialização direta para evitar espaços injetados pelo PowerShell
+    ImGui_ImplVulkan_InitInfo ii = {};
+    ii.Instance = VK_NULL_HANDLE;
+    ii.PhysicalDevice = g_Overlay.physDevice;
+    ii.Device = g_Overlay.device;
+    ii.Queue = g_Overlay.graphicsQueue;
+    ii.DescriptorPool = g_Overlay.descriptorPool;
+    ii.MinImageCount = 2;
+    ii.ImageCount = 3;
+    ii.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    ii.RenderPass = g_Overlay.renderPass;
 
-    ImGui_ImplVulkan_Init(&init_info);
+    ImGui_ImplVulkan_Init(&ii);
     g_Overlay.isInitialized = true;
 }
 
