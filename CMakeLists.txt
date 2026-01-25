@@ -3,30 +3,27 @@ project(xvdriver)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Encontrar Vulkan
-find_package(Vulkan REQUIRED)
+include_directories(include include/imgui)
 
-# Incluir diretórios
-include_directories(${Vulkan_INCLUDE_DIRS})
-include_directories(include)
-include_directories(include/imgui) # Novo include para ImGui
-
-# Definir arquivos do ImGui
-set(IMGUI_SOURCES
+# Lista de arquivos fonte
+set(SOURCES 
+    src/vk_wrapper.cpp
     src/imgui/imgui.cpp
-    src/imgui/imgui_demo.cpp
     src/imgui/imgui_draw.cpp
-    src/imgui/imgui_tables.cpp
     src/imgui/imgui_widgets.cpp
+    src/imgui/imgui_tables.cpp
     src/imgui/imgui_impl_vulkan.cpp
-    src/imgui/imgui_impl_win32.cpp
 )
 
-# Definir a DLL
-add_library(xvdriver SHARED src/vk_wrapper.cpp ${IMGUI_SOURCES} xvdriver.def)
+add_library(xvdriver SHARED ${SOURCES})
 
-# Linkar bibliotecas
-target_link_libraries(xvdriver ${Vulkan_LIBRARIES})
-
-# Definições necessárias para o ImGui não conflitar com Windows
-target_compile_definitions(xvdriver PRIVATE VK_USE_PLATFORM_WIN32_KHR)
+# Configuração específica por Plataforma
+if(ANDROID)
+    # Remove definições de Windows e adiciona as de Android
+    target_compile_definitions(xvdriver PRIVATE VK_USE_PLATFORM_ANDROID_KHR)
+    target_link_libraries(xvdriver vulkan android log)
+else()
+    # Configuração para Windows
+    target_compile_definitions(xvdriver PRIVATE VK_USE_PLATFORM_WIN32_KHR)
+    target_link_libraries(xvdriver vulkan)
+endif()

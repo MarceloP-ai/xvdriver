@@ -2,9 +2,14 @@
 #include <vulkan/vk_layer.h>
 #include <imgui.h>
 #include <imgui_impl_vulkan.h>
-#include <imgui_impl_win32.h>
 #include <string>
 #include <chrono>
+
+#ifdef _WIN32
+#include <imgui_impl_win32.h>
+#else
+// No Android, usamos a implementa??o gen?rica ou Android
+#endif
 
 struct OverlayContext {
     VkInstance instance = VK_NULL_HANDLE;
@@ -74,7 +79,7 @@ extern "C" {
             ImGui::NewFrame();
             ImGui::SetNextWindowPos(ImVec2(20, 20));
             ImGui::Begin("XVDriver", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            ImGui::TextColored(ImVec4(0, 1, 0, 1), "XVDriver TEST VERSION");
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "XVDriver ANDROID");
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
             ImGui::End();
             ImGui::Render();

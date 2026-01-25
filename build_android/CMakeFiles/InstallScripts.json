@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Projeto/xvdriver/build_android/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

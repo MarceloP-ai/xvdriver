@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "name": "XVDriver Overlay",
+  "version": "1.0.0",
+  "author": "MarceloP-ai",
+  "description": "Custom Vulkan Layer for FPS tracking"
+}

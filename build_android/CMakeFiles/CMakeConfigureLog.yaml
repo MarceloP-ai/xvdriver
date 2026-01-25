@@ -1,0 +1,2091 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineSystem.cmake:207 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The target system is: Android - 1 - aarch64
+      The host system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Program used to build from build.ninja files."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ninja-build"
+      - "ninja"
+      - "samu"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja-build.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja-build.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja-build"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ninja"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/samu.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/samu.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/samu"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja-build.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja-build.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja-build"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/ninja"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/samu.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/samu.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sbin/samu"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja-build.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja-build.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja-build"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/ninja"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/samu.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/samu.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/samu"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja-build.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja-build.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja-build"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/ninja"
+      - "C:/VulkanSDK/1.4.335.0/Bin/samu.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/samu.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/samu"
+      - "C:/Windows/System32/ninja-build.com"
+      - "C:/Windows/System32/ninja-build.exe"
+      - "C:/Windows/System32/ninja-build"
+      - "C:/Windows/System32/ninja.com"
+    found: "C:/Windows/System32/ninja.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-Wformat;-Werror=format-security
+      Id flags: -c;--target=aarch64-none-linux-android26 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is Clang, found in:
+        C:/Projeto/xvdriver/build_android/CMakeFiles/4.2.1/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld.lld"
+      - "ld"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-nm"
+      - "nm"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-nm.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-nm.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-objdump"
+      - "objdump"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objdump.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objdump.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-objcopy"
+      - "objcopy"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objcopy.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-objcopy.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-readelf"
+      - "readelf"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-readelf.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-readelf.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-dlltool"
+      - "dlltool"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-dlltool.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-dlltool.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-addr2line"
+      - "addr2line"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-addr2line.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-addr2line.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/tapi.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/tapi.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/tapi"
+      - "C:/VulkanSDK/1.4.335.0/Bin/tapi.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/tapi.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/tapi"
+      - "C:/Windows/System32/tapi.com"
+      - "C:/Windows/System32/tapi.exe"
+      - "C:/Windows/System32/tapi"
+      - "C:/Windows/tapi.com"
+      - "C:/Windows/tapi.exe"
+      - "C:/Windows/tapi"
+      - "C:/Windows/System32/wbem/tapi.com"
+      - "C:/Windows/System32/wbem/tapi.exe"
+      - "C:/Windows/System32/wbem/tapi"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi"
+      - "C:/Windows/System32/OpenSSH/tapi.com"
+      - "C:/Windows/System32/OpenSSH/tapi.exe"
+      - "C:/Windows/System32/OpenSSH/tapi"
+      - "C:/Program Files/Git/cmd/tapi.com"
+      - "C:/Program Files/Git/cmd/tapi.exe"
+      - "C:/Program Files/Git/cmd/tapi"
+      - "C:/Program Files/CMake/bin/tapi.com"
+      - "C:/Program Files/CMake/bin/tapi.exe"
+      - "C:/Program Files/CMake/bin/tapi"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/tapi.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/tapi.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/tapi"
+      - "/usr/lib/aarch64-linux-android/26/bin/tapi.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/tapi.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/tapi"
+      - "/usr/lib/aarch64-linux-android/26/sbin/tapi.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/tapi.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/tapi"
+      - "/usr/lib/aarch64-linux-android/26/tapi.com"
+      - "/usr/lib/aarch64-linux-android/26/tapi.exe"
+      - "/usr/lib/aarch64-linux-android/26/tapi"
+    found: false
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:26 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_AR"
+    description: "LLVM archiver"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ar-18.0"
+      - "llvm-ar-18"
+      - "llvm-ar18"
+      - "llvm-ar"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0"
+      - "C:/Windows/System32/llvm-ar-18.0.com"
+      - "C:/Windows/System32/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/llvm-ar-18.0"
+      - "C:/Windows/llvm-ar-18.0.com"
+      - "C:/Windows/llvm-ar-18.0.exe"
+      - "C:/Windows/llvm-ar-18.0"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0.com"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0.com"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0.com"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18"
+      - "C:/Windows/System32/llvm-ar-18.com"
+      - "C:/Windows/System32/llvm-ar-18.exe"
+      - "C:/Windows/System32/llvm-ar-18"
+      - "C:/Windows/llvm-ar-18.com"
+      - "C:/Windows/llvm-ar-18.exe"
+      - "C:/Windows/llvm-ar-18"
+      - "C:/Windows/System32/wbem/llvm-ar-18.com"
+      - "C:/Windows/System32/wbem/llvm-ar-18.exe"
+      - "C:/Windows/System32/wbem/llvm-ar-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.com"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar-18"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.com"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18"
+      - "C:/Windows/System32/llvm-ar18.com"
+      - "C:/Windows/System32/llvm-ar18.exe"
+      - "C:/Windows/System32/llvm-ar18"
+      - "C:/Windows/llvm-ar18.com"
+      - "C:/Windows/llvm-ar18.exe"
+      - "C:/Windows/llvm-ar18"
+      - "C:/Windows/System32/wbem/llvm-ar18.com"
+      - "C:/Windows/System32/wbem/llvm-ar18.exe"
+      - "C:/Windows/System32/wbem/llvm-ar18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18"
+      - "C:/Program Files/Git/cmd/llvm-ar18.com"
+      - "C:/Program Files/Git/cmd/llvm-ar18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar18"
+      - "C:/Program Files/CMake/bin/llvm-ar18.com"
+      - "C:/Program Files/CMake/bin/llvm-ar18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:38 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_RANLIB"
+    description: "Generate index for LLVM archive"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ranlib-18.0"
+      - "llvm-ranlib-18"
+      - "llvm-ranlib18"
+      - "llvm-ranlib"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0"
+      - "C:/Windows/System32/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/llvm-ranlib-18.0"
+      - "C:/Windows/llvm-ranlib-18.0.com"
+      - "C:/Windows/llvm-ranlib-18.0.exe"
+      - "C:/Windows/llvm-ranlib-18.0"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18"
+      - "C:/Windows/System32/llvm-ranlib-18.com"
+      - "C:/Windows/System32/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/llvm-ranlib-18"
+      - "C:/Windows/llvm-ranlib-18.com"
+      - "C:/Windows/llvm-ranlib-18.exe"
+      - "C:/Windows/llvm-ranlib-18"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18"
+      - "C:/Windows/System32/llvm-ranlib18.com"
+      - "C:/Windows/System32/llvm-ranlib18.exe"
+      - "C:/Windows/System32/llvm-ranlib18"
+      - "C:/Windows/llvm-ranlib18.com"
+      - "C:/Windows/llvm-ranlib18.exe"
+      - "C:/Windows/llvm-ranlib18"
+      - "C:/Windows/System32/wbem/llvm-ranlib18.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib18.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:50 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_CLANG_SCAN_DEPS"
+    description: "`clang-scan-deps` dependency scanner"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang-scan-deps-18.0"
+      - "clang-scan-deps-18"
+      - "clang-scan-deps18"
+      - "clang-scan-deps"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0"
+      - "C:/Windows/System32/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/clang-scan-deps-18.0"
+      - "C:/Windows/clang-scan-deps-18.0.com"
+      - "C:/Windows/clang-scan-deps-18.0.exe"
+      - "C:/Windows/clang-scan-deps-18.0"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18"
+      - "C:/Windows/System32/clang-scan-deps-18.com"
+      - "C:/Windows/System32/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/clang-scan-deps-18"
+      - "C:/Windows/clang-scan-deps-18.com"
+      - "C:/Windows/clang-scan-deps-18.exe"
+      - "C:/Windows/clang-scan-deps-18"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18"
+      - "C:/Windows/System32/clang-scan-deps18.com"
+      - "C:/Windows/System32/clang-scan-deps18.exe"
+      - "C:/Windows/System32/clang-scan-deps18"
+      - "C:/Windows/clang-scan-deps18.com"
+      - "C:/Windows/clang-scan-deps18.exe"
+      - "C:/Windows/clang-scan-deps18"
+      - "C:/Windows/System32/wbem/clang-scan-deps18.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps18.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-Wformat;-Werror=format-security
+      Id flags: -c;--target=aarch64-none-linux-android26 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        C:/Projeto/xvdriver/build_android/CMakeFiles/4.2.1/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:26 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "LLVM archiver"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ar-18.0"
+      - "llvm-ar-18"
+      - "llvm-ar18"
+      - "llvm-ar"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.0"
+      - "C:/Windows/System32/llvm-ar-18.0.com"
+      - "C:/Windows/System32/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/llvm-ar-18.0"
+      - "C:/Windows/llvm-ar-18.0.com"
+      - "C:/Windows/llvm-ar-18.0.exe"
+      - "C:/Windows/llvm-ar-18.0"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0.com"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/wbem/llvm-ar-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.0"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.0"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0.com"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.0"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0.com"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.0"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar-18"
+      - "C:/Windows/System32/llvm-ar-18.com"
+      - "C:/Windows/System32/llvm-ar-18.exe"
+      - "C:/Windows/System32/llvm-ar-18"
+      - "C:/Windows/llvm-ar-18.com"
+      - "C:/Windows/llvm-ar-18.exe"
+      - "C:/Windows/llvm-ar-18"
+      - "C:/Windows/System32/wbem/llvm-ar-18.com"
+      - "C:/Windows/System32/wbem/llvm-ar-18.exe"
+      - "C:/Windows/System32/wbem/llvm-ar-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar-18"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar-18"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.com"
+      - "C:/Program Files/Git/cmd/llvm-ar-18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar-18"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.com"
+      - "C:/Program Files/CMake/bin/llvm-ar-18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar-18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ar18"
+      - "C:/Windows/System32/llvm-ar18.com"
+      - "C:/Windows/System32/llvm-ar18.exe"
+      - "C:/Windows/System32/llvm-ar18"
+      - "C:/Windows/llvm-ar18.com"
+      - "C:/Windows/llvm-ar18.exe"
+      - "C:/Windows/llvm-ar18"
+      - "C:/Windows/System32/wbem/llvm-ar18.com"
+      - "C:/Windows/System32/wbem/llvm-ar18.exe"
+      - "C:/Windows/System32/wbem/llvm-ar18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ar18"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ar18"
+      - "C:/Program Files/Git/cmd/llvm-ar18.com"
+      - "C:/Program Files/Git/cmd/llvm-ar18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ar18"
+      - "C:/Program Files/CMake/bin/llvm-ar18.com"
+      - "C:/Program Files/CMake/bin/llvm-ar18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ar18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ar18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ar18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:38 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "Generate index for LLVM archive"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ranlib-18.0"
+      - "llvm-ranlib-18"
+      - "llvm-ranlib18"
+      - "llvm-ranlib"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.0"
+      - "C:/Windows/System32/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/llvm-ranlib-18.0"
+      - "C:/Windows/llvm-ranlib-18.0.com"
+      - "C:/Windows/llvm-ranlib-18.0.exe"
+      - "C:/Windows/llvm-ranlib-18.0"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.0"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.0"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.0"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.0"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib-18"
+      - "C:/Windows/System32/llvm-ranlib-18.com"
+      - "C:/Windows/System32/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/llvm-ranlib-18"
+      - "C:/Windows/llvm-ranlib-18.com"
+      - "C:/Windows/llvm-ranlib-18.exe"
+      - "C:/Windows/llvm-ranlib-18"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib-18"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib-18"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib-18"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib-18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/llvm-ranlib18"
+      - "C:/Windows/System32/llvm-ranlib18.com"
+      - "C:/Windows/System32/llvm-ranlib18.exe"
+      - "C:/Windows/System32/llvm-ranlib18"
+      - "C:/Windows/llvm-ranlib18.com"
+      - "C:/Windows/llvm-ranlib18.exe"
+      - "C:/Windows/llvm-ranlib18"
+      - "C:/Windows/System32/wbem/llvm-ranlib18.com"
+      - "C:/Windows/System32/wbem/llvm-ranlib18.exe"
+      - "C:/Windows/System32/wbem/llvm-ranlib18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/llvm-ranlib18"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18.com"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18.exe"
+      - "C:/Windows/System32/OpenSSH/llvm-ranlib18"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18.com"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18.exe"
+      - "C:/Program Files/Git/cmd/llvm-ranlib18"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18.com"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18.exe"
+      - "C:/Program Files/CMake/bin/llvm-ranlib18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/llvm-ranlib18"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18.com"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18.exe"
+      - "/usr/lib/aarch64-linux-android/26/llvm-ranlib18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ranlib.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/Clang-FindBinUtils.cmake:50 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS"
+    description: "`clang-scan-deps` dependency scanner"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang-scan-deps-18.0"
+      - "clang-scan-deps-18"
+      - "clang-scan-deps18"
+      - "clang-scan-deps"
+    candidate_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/"
+      - "C:/VulkanSDK/1.4.335.0/Bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/"
+      - "/usr/lib/aarch64-linux-android/26/bin/"
+      - "/usr/lib/aarch64-linux-android/26/sbin/"
+      - "/usr/lib/aarch64-linux-android/26/"
+    searched_directories:
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.0"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.0"
+      - "C:/Windows/System32/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/clang-scan-deps-18.0"
+      - "C:/Windows/clang-scan-deps-18.0.com"
+      - "C:/Windows/clang-scan-deps-18.0.exe"
+      - "C:/Windows/clang-scan-deps-18.0"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.0"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.0"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.0"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.0"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.0"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.0"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.0"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps-18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps-18"
+      - "C:/Windows/System32/clang-scan-deps-18.com"
+      - "C:/Windows/System32/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/clang-scan-deps-18"
+      - "C:/Windows/clang-scan-deps-18.com"
+      - "C:/Windows/clang-scan-deps-18.exe"
+      - "C:/Windows/clang-scan-deps-18"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps-18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps-18"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps-18"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps-18"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps-18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps-18"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps-18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18.com"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18.exe"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps18"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18.com"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18.exe"
+      - "C:/VulkanSDK/1.4.335.0/Bin/clang-scan-deps18"
+      - "C:/Windows/System32/clang-scan-deps18.com"
+      - "C:/Windows/System32/clang-scan-deps18.exe"
+      - "C:/Windows/System32/clang-scan-deps18"
+      - "C:/Windows/clang-scan-deps18.com"
+      - "C:/Windows/clang-scan-deps18.exe"
+      - "C:/Windows/clang-scan-deps18"
+      - "C:/Windows/System32/wbem/clang-scan-deps18.com"
+      - "C:/Windows/System32/wbem/clang-scan-deps18.exe"
+      - "C:/Windows/System32/wbem/clang-scan-deps18"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang-scan-deps18"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18.com"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18.exe"
+      - "C:/Windows/System32/OpenSSH/clang-scan-deps18"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18.com"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18.exe"
+      - "C:/Program Files/Git/cmd/clang-scan-deps18"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18.com"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18.exe"
+      - "C:/Program Files/CMake/bin/clang-scan-deps18"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18.com"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18.exe"
+      - "C:/Users/mr795/AppData/Local/Microsoft/WindowsApps/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/bin/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/sbin/clang-scan-deps18"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18.com"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18.exe"
+      - "/usr/lib/aarch64-linux-android/26/clang-scan-deps18"
+      - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.com"
+    found: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.exe"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64"
+      ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.335.0\\Bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\mr795\\AppData\\Local\\Microsoft\\WindowsApps"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/26"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "C:/Android/ndk/android-ndk-r27d"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj"
+      binary: "C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-26"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.exe"
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android26"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android26"
+      CMAKE_C_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat "
+      CMAKE_C_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj'
+        
+        Run Build Command(s): C:/Windows/System32/ninja.exe -v cmTC_30df8
+        [1/2] C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -MF CMakeFiles\\cmTC_30df8.dir\\CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerABI.c"
+        Android (13691557, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: aarch64-none-linux-android26
+        Thread model: posix
+        InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin
+         (in-process)
+         "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64\\\\bin\\\\clang.exe" -cc1 -triple aarch64-none-linux-android26 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj -resource-dir "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18" -dependency-file "CMakeFiles\\\\cmTC_30df8.dir\\\\CMakeCCompilerABI.c.o.d" -MT CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/include" -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -x c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerABI.c"
+        clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-w64-windows-gnu
+        ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64/lib/clang/18/include
+         C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android
+         C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+        End of search list.
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -o cmTC_30df8   && cd ."
+        Android (13691557, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: aarch64-none-linux-android26
+        Thread model: posix
+        InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin
+         "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_30df8 C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o "-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64" -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26 -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl -lc "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include]
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include]
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        implicit include dirs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Windows/System32/ninja.exe -v cmTC_30df8]
+        ignore line: [[1/2] C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -MF CMakeFiles\\cmTC_30df8.dir\\CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Android (13691557  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: aarch64-none-linux-android26]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64\\\\bin\\\\clang.exe" -cc1 -triple aarch64-none-linux-android26 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-0psebj -resource-dir "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18" -dependency-file "CMakeFiles\\\\cmTC_30df8.dir\\\\CMakeCCompilerABI.c.o.d" -MT CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/include" -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -x c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerABI.c"]
+        ignore line: [clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-w64-windows-gnu]
+        ignore line: [ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64/lib/clang/18/include]
+        ignore line: [ C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl --build-id=sha1 -Wl --no-rosegment -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o -o cmTC_30df8   && cd ."]
+        ignore line: [Android (13691557  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: aarch64-none-linux-android26]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        link line: [ "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_30df8 C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o "-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64" -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26 -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl -lc "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_30df8] ==> ignore
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o] ==> obj [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o]
+          arg [-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_30df8.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o] ==> obj [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+        linker tool for 'C': C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld
+        remove lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/lib/linux/aarch64]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit libs: [-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+        implicit dirs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/lib/linux/aarch64;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" "-v"
+      LLD 18.0.4 (compatible with GNU linkers)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml"
+      binary: "C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-26"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/clang-scan-deps.exe"
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android26"
+      CMAKE_CXX_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat  "
+      CMAKE_CXX_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android26"
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml'
+        
+        Run Build Command(s): C:/Windows/System32/ninja.exe -v cmTC_c6b8e
+        [1/2] C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles\\cmTC_c6b8e.dir\\CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp"
+        Android (13691557, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: aarch64-none-linux-android26
+        Thread model: posix
+        InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin
+         (in-process)
+         "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64\\\\bin\\\\clang++.exe" -cc1 -triple aarch64-none-linux-android26 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml -resource-dir "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18" -dependency-file "CMakeFiles\\\\cmTC_c6b8e.dir\\\\CMakeCXXCompilerABI.cpp.o.d" -MT CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1 -internal-isystem "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/include" -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -x c++ "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp"
+        clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-w64-windows-gnu
+        ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1
+         C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64/lib/clang/18/include
+         C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android
+         C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+        End of search list.
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_c6b8e   && cd ."
+        Android (13691557, based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+        Target: aarch64-none-linux-android26
+        Thread model: posix
+        InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin
+         "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_c6b8e C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o "-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64" -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26 -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl -lc "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include]
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include]
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        implicit include dirs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/include;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Windows/System32/ninja.exe -v cmTC_c6b8e]
+        ignore line: [[1/2] C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles\\cmTC_c6b8e.dir\\CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Android (13691557  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: aarch64-none-linux-android26]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64\\\\bin\\\\clang++.exe" -cc1 -triple aarch64-none-linux-android26 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Projeto/xvdriver/build_android/CMakeFiles/CMakeScratch/TryCompile-s9krml -resource-dir "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18" -dependency-file "CMakeFiles\\\\cmTC_c6b8e.dir\\\\CMakeCXXCompilerABI.cpp.o.d" -MT CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1 -internal-isystem "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/include" -internal-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -x c++ "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [clang -cc1 version 18.0.4 based upon LLVM 18.0.4 default target x86_64-w64-windows-gnu]
+        ignore line: [ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64/lib/clang/18/include]
+        ignore line: [ C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Android\\ndk\\android-ndk-r27d\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl --build-id=sha1 -Wl --no-rosegment -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_c6b8e   && cd ."]
+        ignore line: [Android (13691557  based on r522817d) clang version 18.0.4 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
+        ignore line: [Target: aarch64-none-linux-android26]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        link line: [ "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_c6b8e C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o "-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64" -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26 -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl -lc "C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a" -l:libunwind.a -ldl C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_c6b8e] ==> ignore
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o] ==> obj [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o]
+          arg [-LC:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-LC:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_c6b8e.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-Bstatic] ==> search static
+          arg [-lc++] ==> lib [c++]
+          arg [-Bdynamic] ==> search dynamic
+          arg [-lm] ==> lib [m]
+          arg [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o] ==> obj [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+        linker tool for 'CXX': C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld
+        remove lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [C:\\\\Android\\\\ndk\\\\android-ndk-r27d\\\\toolchains\\\\llvm\\\\prebuilt\\\\windows-x86_64/lib/clang/18/lib/linux/aarch64] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/lib/linux/aarch64]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit libs: [c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtbegin_dynamic.o;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26/crtend_android.o]
+        implicit dirs: [C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/18/lib/linux/aarch64;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/26;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android;C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" "-v"
+      LLD 18.0.4 (compatible with GNU linkers)
+...
