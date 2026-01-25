@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver GOD MODE v7",
-  "version": "4.0.1",
+  "name": "XVDriver DEBUG v8",
+  "version": "5.0.0",
   "author": "MarceloP-ai",
-  "description": "AF Bypass + Extension Injection + LOD Bias 2.5 + Fix Swapchain"
+  "description": "Extension Analytics + Swapchain Logger + LOD Bias 2.5"
 }
