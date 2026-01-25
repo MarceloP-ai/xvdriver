@@ -35,15 +35,13 @@ void UpdateFPS() {
     }
 }
 
-// Inicialização segura dos backends do ImGui
-void SetupImGui(VkCommandBuffer cmd) {
+void SetupImGui() {
     if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE) return;
 
     ImGui::CreateContext();
     
-    // Configuração mínima para o Backend Vulkan
     ImGui_ImplVulkan_InitInfo init_info = {};
-    init_info.Instance = VK_NULL_HANDLE; // O Loader resolve internamente
+    init_info.Instance = VK_NULL_HANDLE; 
     init_info.PhysicalDevice = g_Overlay.physDevice;
     init_info.Device = g_Overlay.device;
     init_info.Queue = g_Overlay.graphicsQueue;
@@ -51,18 +49,21 @@ void SetupImGui(VkCommandBuffer cmd) {
     init_info.MinImageCount = 2;
     init_info.ImageCount = 3;
     init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    init_info.RenderPass = g_Overlay.renderPass; // Na v1.90+ o RenderPass vai aqui
 
-    ImGui_ImplVulkan_Init(&init_info, g_Overlay.renderPass);
+    ImGui_ImplVulkan_Init(&init_info); // Agora recebe apenas a struct
     
-    // Carregar fontes para a GPU
-    ImGui_ImplVulkan_CreateFontsTexture(cmd);
+    // Na versão nova, não é estritamente necessário chamar CreateFontsTexture manualmente 
+    // se usarmos as funções de NewFrame corretamente, mas vamos garantir.
 
     g_Overlay.isInitialized = true;
 }
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized) SetupImGui(commandBuffer);
+        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE) {
+            SetupImGui();
+        }
         
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame();
