@@ -8,7 +8,7 @@
 #include <android/log.h>
 
 #define SCALE_FACTOR 0.70f 
-#define LOD_BIAS 2.5f // Mais agressivo que a v6
+#define LOD_BIAS 2.5f
 #define LOG_TAG "XVD_GOD"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
@@ -23,35 +23,57 @@ struct OverlayContext {
 };
 
 OverlayContext g_Overlay;
+bool g_FrameReady = false;
+
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
+PFN_vkCmdSetViewport g_pfnCmdSetViewport = nullptr;
 
 extern "C" {
-    // 1. SUPERAÇÃO: Injeção de Extensões (Engana o motor do jogo sobre capacidades da GPU)
+
+    // 1. DOWNSCALING & UNLOCK FPS
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
+        VkSwapchainCreateInfoKHR modInfo = *pCreateInfo;
+        modInfo.imageExtent.width = (uint32_t)(pCreateInfo->imageExtent.width * SCALE_FACTOR);
+        modInfo.imageExtent.height = (uint32_t)(pCreateInfo->imageExtent.height * SCALE_FACTOR);
+        modInfo.presentMode = VK_PRESENT_MODE_IMMEDIATE_KHR; 
+        g_Overlay.width = modInfo.imageExtent.width;
+        g_Overlay.height = modInfo.imageExtent.height;
+        return g_pfnCreateSwapchain(device, &modInfo, pAllocator, pSwapchain);
+    }
+
+    // 2. SUPERAÇÃO: Injeção de Extensões
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEnumerateDeviceExtensionProperties(VkPhysicalDevice phys, const char* pLayerName, uint32_t* pPropCount, VkExtensionProperties* pProps) {
         PFN_vkEnumerateDeviceExtensionProperties pfn = (PFN_vkEnumerateDeviceExtensionProperties)g_pfnGetInstanceProcAddr(g_Overlay.instance, "vkEnumerateDeviceExtensionProperties");
         VkResult res = pfn(phys, pLayerName, pPropCount, pProps);
 
-        if (pProps && pPropCount) {
-            // Adicionamos extensões que a Xclipse/Mali as vezes esconde mas suporta via wrapper
+        if (res == VK_SUCCESS && pProps && pPropCount && *pPropCount > 2) {
             strncpy(pProps[0].extensionName, "VK_EXT_texture_compression_astc_hdr", VK_MAX_EXTENSION_NAME_SIZE);
             strncpy(pProps[1].extensionName, "VK_EXT_custom_border_color", VK_MAX_EXTENSION_NAME_SIZE);
-            LOGI("XVD God: Extensions Injected");
         }
         return res;
     }
 
-    // 2. PERFORMANCE: Sampler Xtreme
+    // 3. PERFORMANCE: Sampler Xtreme & AF Bypass
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSampler(VkDevice dev, const VkSamplerCreateInfo* pInfo, const VkAllocationCallbacks* pAlloc, VkSampler* pSamp) {
         VkSamplerCreateInfo mod = *pInfo;
         mod.mipLodBias += LOD_BIAS; 
-        mod.anisotropyEnable = VK_FALSE; // Desativar AF para ganhar 5-10% de FPS
+        mod.anisotropyEnable = VK_FALSE; 
         PFN_vkCreateSampler pfn = (PFN_vkCreateSampler)g_pfnGetDeviceProcAddr(dev, "vkCreateSampler");
         return pfn(dev, &mod, pAlloc, pSamp);
     }
 
-    // 3. OVERLAY: Minimalista e intimidador
+    // 4. CORREÇÃO DE VIEWPORT
+    VKAPI_ATTR void VKAPI_CALL xv_vkCmdSetViewport(VkCommandBuffer cmd, uint32_t first, uint32_t count, const VkViewport* pVp) {
+        VkViewport hackedVp = *pVp;
+        hackedVp.width = (float)g_Overlay.width;
+        hackedVp.height = (float)g_Overlay.height;
+        if (!g_pfnCmdSetViewport) g_pfnCmdSetViewport = (PFN_vkCmdSetViewport)g_pfnGetDeviceProcAddr(g_Overlay.device, "vkCmdSetViewport");
+        g_pfnCmdSetViewport(cmd, first, count, &hackedVp);
+    }
+
+    // 5. OVERLAY GOD MODE
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer cmd) {
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame(); ImGui::NewFrame();
@@ -71,6 +93,7 @@ extern "C" {
         g_Overlay.device = dev;
         std::string n = pName;
         if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
+        if (n == "vkCmdSetViewport") return (PFN_vkVoidFunction)xv_vkCmdSetViewport;
         if (n == "vkCreateSampler") return (PFN_vkVoidFunction)xv_vkCreateSampler;
         return g_pfnGetDeviceProcAddr(dev, pName);
     }
@@ -81,7 +104,7 @@ extern "C" {
         if (n == "vkEnumerateDeviceExtensionProperties") return (PFN_vkVoidFunction)xv_vkEnumerateDeviceExtensionProperties;
         if (n == "vkCreateSwapchainKHR") {
             g_pfnCreateSwapchain = (PFN_vkCreateSwapchainKHR)g_pfnGetInstanceProcAddr(inst, "vkCreateSwapchainKHR");
-            return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR; // Usa lógica anterior de escala
+            return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         }
         return g_pfnGetInstanceProcAddr(inst, pName);
     }
