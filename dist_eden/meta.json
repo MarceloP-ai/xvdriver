@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver Elite v2",
-  "version": "1.8.0",
+  "name": "XVDriver Elite v3",
+  "version": "1.9.0",
   "author": "MarceloP-ai",
-  "description": "Super Spoof (Adreno 750) + Fullscreen Fix + Bypass V-Sync"
+  "description": "Deep Spoof (Adreno 750) + Enum Intercept + Bypass V-Sync"
 }

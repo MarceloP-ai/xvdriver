@@ -4,7 +4,6 @@
 #include <imgui_impl_vulkan.h>
 #include <string>
 #include <chrono>
-#include <vector>
 #include <android/log.h>
 
 #define SCALE_FACTOR 0.70f 
@@ -31,15 +30,11 @@ bool g_FrameReady = false;
 
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
-PFN_vkCreateDevice g_pfnCreateDevice = nullptr;
-PFN_vkCmdEndRenderPass g_pfnCmdEndRenderPass = nullptr;
-PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
-PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 PFN_vkCmdSetViewport g_pfnCmdSetViewport = nullptr;
 
 void MaskProperties(VkPhysicalDeviceProperties* props) {
-    props->vendorID = 0x5143; 
+    props->vendorID = 0x5143; // Qualcomm ID
     props->deviceID = 0x41445245; 
     props->driverVersion = VK_MAKE_VERSION(512, 744, 0);
     memset(props->deviceName, 0, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE);
@@ -47,18 +42,7 @@ void MaskProperties(VkPhysicalDeviceProperties* props) {
 }
 
 extern "C" {
-    // 1. DEEP SPOOF: Intercepta a listagem de GPUs
-    VKAPI_ATTR VkResult VKAPI_CALL xv_vkEnumeratePhysicalDevices(VkInstance instance, uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) {
-        PFN_vkEnumeratePhysicalDevices pfn = (PFN_vkEnumeratePhysicalDevices)g_pfnGetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices");
-        VkResult res = pfn(instance, pPhysicalDeviceCount, pPhysicalDevices);
-        
-        if (res == VK_SUCCESS && pPhysicalDevices && pPhysicalDeviceCount && *pPhysicalDeviceCount > 0) {
-            g_Overlay.physDevice = pPhysicalDevices[0];
-            LOGI("XVDriver: Physical Device Intercepted");
-        }
-        return res;
-    }
-
+    // 1. FORÇAR PROPRIEDADES EM TODOS OS NÍVEIS
     VKAPI_ATTR void VKAPI_CALL xv_vkGetPhysicalDeviceProperties(VkPhysicalDevice phys, VkPhysicalDeviceProperties* pProps) {
         PFN_vkGetPhysicalDeviceProperties pfn = (PFN_vkGetPhysicalDeviceProperties)g_pfnGetInstanceProcAddr(g_Overlay.instance, "vkGetPhysicalDeviceProperties");
         pfn(phys, pProps);
@@ -71,6 +55,7 @@ extern "C" {
         MaskProperties(&pProps2->properties);
     }
 
+    // 2. INTERCEPTAR CRIAÇÃO DA SWAPCHAIN (DOWNSCALE)
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
         VkSwapchainCreateInfoKHR modInfo = *pCreateInfo;
         g_Overlay.realW = pCreateInfo->imageExtent.width;
@@ -83,6 +68,7 @@ extern "C" {
         return g_pfnCreateSwapchain(device, &modInfo, pAllocator, pSwapchain);
     }
 
+    // 3. CORREÇÃO DE VIEWPORT
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdSetViewport(VkCommandBuffer cmd, uint32_t first, uint32_t count, const VkViewport* pVp) {
         VkViewport hackedVp = *pVp;
         hackedVp.width = (float)g_Overlay.width;
@@ -90,43 +76,34 @@ extern "C" {
         g_pfnCmdSetViewport(cmd, first, count, &hackedVp);
     }
 
+    // 4. OVERLAY IMGUID
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame(); ImGui::NewFrame();
-            ImGui::SetNextWindowPos(ImVec2(60, 150), ImGuiCond_Always);
-            ImGui::Begin("XVD_ELITE", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            ImGui::TextColored(ImVec4(0,1,0,1), "Active GPU: %s", g_Overlay.maskedGpuName);
-            ImGui::Text("Internal Res: %dx%d", g_Overlay.width, g_Overlay.height);
-            ImGui::TextColored(ImVec4(1,1,0,1), "FPS: %.1f", g_Overlay.fps);
+            ImGui::SetNextWindowPos(ImVec2(50, 50));
+            ImGui::Begin("XVD_ULTIMATE", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "HARDWARE MASKED: %s", g_Overlay.maskedGpuName);
+            ImGui::Text("Render: %dx%d", g_Overlay.width, g_Overlay.height);
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "FPS: %.1f", g_Overlay.fps);
             ImGui::End(); ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
             g_FrameReady = false;
         }
-        g_pfnCmdEndRenderPass(commandBuffer);
-    }
-
-    VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
-        g_Overlay.frameCount++;
-        auto now = std::chrono::high_resolution_clock::now();
-        if (std::chrono::duration<float>(now - g_Overlay.lastTime).count() >= 1.0f) {
-            g_Overlay.fps = (float)g_Overlay.frameCount;
-            g_Overlay.frameCount = 0;
-            g_Overlay.lastTime = now;
-        }
-        g_FrameReady = true; return g_pfnQueuePresent(queue, pPresentInfo);
+        PFN_vkCmdEndRenderPass pfn = (PFN_vkCmdEndRenderPass)g_pfnGetDeviceProcAddr(g_Overlay.device, "vkCmdEndRenderPass");
+        pfn(commandBuffer);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
+        g_Overlay.device = device;
         std::string n = pName;
         if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
         if (n == "vkCmdSetViewport") return (PFN_vkVoidFunction)xv_vkCmdSetViewport;
-        if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         return g_pfnGetDeviceProcAddr(device, pName);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
+        g_Overlay.instance = instance;
         std::string n = pName;
-        if (n == "vkEnumeratePhysicalDevices") return (PFN_vkVoidFunction)xv_vkEnumeratePhysicalDevices;
         if (n == "vkGetPhysicalDeviceProperties") return (PFN_vkVoidFunction)xv_vkGetPhysicalDeviceProperties;
         if (n == "vkGetPhysicalDeviceProperties2") return (PFN_vkVoidFunction)xv_vkGetPhysicalDeviceProperties2;
         if (n == "vkCreateSwapchainKHR") {
