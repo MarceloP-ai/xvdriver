@@ -10,6 +10,8 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkDevice device = VK_NULL_HANDLE;
+    VkPhysicalDevice physDevice = VK_NULL_HANDLE;
+    VkQueue graphicsQueue = VK_NULL_HANDLE;
     bool isInitialized = false;
     float fps = 0.0f;
 };
@@ -33,19 +35,42 @@ void UpdateFPS() {
     }
 }
 
+// Inicialização segura dos backends do ImGui
+void SetupImGui(VkCommandBuffer cmd) {
+    if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE) return;
+
+    ImGui::CreateContext();
+    
+    // Configuração mínima para o Backend Vulkan
+    ImGui_ImplVulkan_InitInfo init_info = {};
+    init_info.Instance = VK_NULL_HANDLE; // O Loader resolve internamente
+    init_info.PhysicalDevice = g_Overlay.physDevice;
+    init_info.Device = g_Overlay.device;
+    init_info.Queue = g_Overlay.graphicsQueue;
+    init_info.DescriptorPool = g_Overlay.descriptorPool;
+    init_info.MinImageCount = 2;
+    init_info.ImageCount = 3;
+    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+
+    ImGui_ImplVulkan_Init(&init_info, g_Overlay.renderPass);
+    
+    // Carregar fontes para a GPU
+    ImGui_ImplVulkan_CreateFontsTexture(cmd);
+
+    g_Overlay.isInitialized = true;
+}
+
 extern "C" {
-    // Hook para injetar o desenho no final da lista de comandos
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
+        if (!g_Overlay.isInitialized) SetupImGui(commandBuffer);
+        
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
-            
-            // Janela do FPS
             ImGui::SetNextWindowPos(ImVec2(10, 10));
-            ImGui::Begin("XVDriver Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoSavedSettings);
-            ImGui::Text("FPS: %.1f", g_Overlay.fps);
+            ImGui::Begin("Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
+            ImGui::Text("XVDriver FPS: %.1f", g_Overlay.fps);
             ImGui::End();
-            
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
         }
@@ -65,6 +90,7 @@ extern "C" {
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
         UpdateFPS();
+        g_Overlay.graphicsQueue = queue;
         return g_pfnNextQueuePresent(queue, pPresentInfo);
     }
 
