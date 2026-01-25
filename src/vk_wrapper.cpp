@@ -1,64 +1,60 @@
-#include <vulkan/vulkan.h>
+﻿#include <vulkan/vulkan.h>
 #include <vulkan/vk_layer.h>
-#include <chrono>
-#include <fstream>
+#include <imgui.h>
+#include <imgui_impl_vulkan.h>
+#include <imgui_impl_win32.h>
 #include <string>
-#include <map>
 
-// Armazena o ponteiro original da fun??o de apresenta??o
+struct OverlayContext {
+    VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
+    VkRenderPass renderPass = VK_NULL_HANDLE;
+    VkDevice device = VK_NULL_HANDLE;
+    bool isInitialized = false;
+};
+
+OverlayContext g_Overlay;
 PFN_vkQueuePresentKHR g_pfnNextQueuePresent = nullptr;
+PFN_vkCreateSwapchainKHR g_pfnNextCreateSwapchain = nullptr;
+PFN_vkCreateRenderPass g_pfnNextCreateRenderPass = nullptr;
 
 extern "C" {
-    void WriteLog(const std::string& msg) {
-        std::ofstream log("C:\\Projeto\\xvdriver\\log.txt", std::ios::app);
-        if(log.is_open()) { log << msg << std::endl; }
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
+        if (!g_pfnNextCreateRenderPass) return VK_ERROR_INITIALIZATION_FAILED;
+        VkResult result = g_pfnNextCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
+        if (result == VK_SUCCESS) g_Overlay.renderPass = *pRenderPass;
+        return result;
+    }
+
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
+        g_Overlay.device = device;
+        if (!g_pfnNextCreateSwapchain) return VK_ERROR_INITIALIZATION_FAILED;
+        return g_pfnNextCreateSwapchain(device, pCreateInfo, pAllocator, pSwapchain);
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
-        static auto lastTime = std::chrono::high_resolution_clock::now();
-        static uint32_t frameCount = 0;
-        frameCount++;
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = currentTime - lastTime;
-        
-        if (elapsed.count() >= 1.0) {
-            WriteLog("FPS: " + std::to_string(frameCount / elapsed.count()));
-            frameCount = 0;
-            lastTime = currentTime;
-        }
-
-        // CHAMA A FUN??O REAL (Isso evita que o jogo trave ou a layer seja ignorada)
-        if (g_pfnNextQueuePresent) return g_pfnNextQueuePresent(queue, pPresentInfo);
-        return VK_SUCCESS; 
+        return g_pfnNextQueuePresent(queue, pPresentInfo);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
-        if (std::string(pName) == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+        std::string n = pName;
+        if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
+        if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
+        if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
         return nullptr;
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
-        if (std::string(pName) == "vkGetInstanceProcAddr") return (PFN_vkVoidFunction)xv_vkGetInstanceProcAddr;
-        if (std::string(pName) == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
-        if (std::string(pName) == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+        std::string n = pName;
+        if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
+        if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
+        if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+        if (n == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
         return nullptr;
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
-        uint32_t* pVersion = (uint32_t*)pVersionStruct;
-        if (*pVersion >= 2) {
-            *pVersion = 2;
-            pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
-            pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
-            pVersionStruct->pfnGetPhysicalDeviceProcAddr = nullptr;
-
-            // Busca o ponteiro real do driver para o Present
-            if (pVersionStruct->pfnGetInstanceProcAddr) {
-                g_pfnNextQueuePresent = (PFN_vkQueuePresentKHR)pVersionStruct->pfnGetDeviceProcAddr(NULL, "vkQueuePresentKHR");
-            }
-            
-            WriteLog("Layer engatada na corrente Vulkan!");
-        }
+    __declspec(dllexport) VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
+        pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
+        pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
         return VK_SUCCESS;
     }
 }
