@@ -19,7 +19,6 @@ PFN_vkQueuePresentKHR g_pfnNextQueuePresent = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnNextCreateSwapchain = nullptr;
 PFN_vkCreateRenderPass g_pfnNextCreateRenderPass = nullptr;
 
-// Lógica de cálculo de FPS
 void UpdateFPS() {
     static auto lastTime = std::chrono::high_resolution_clock::now();
     static int frames = 0;
@@ -49,7 +48,6 @@ extern "C" {
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
         UpdateFPS();
-        // O desenho efetivo do ImGui entrará aqui após resolvermos o CommandBuffer
         return g_pfnNextQueuePresent(queue, pPresentInfo);
     }
 
@@ -70,13 +68,10 @@ extern "C" {
         return nullptr;
     }
 
-    // Removido o __declspec(dllexport) daqui para evitar erro C2375
-    VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
-        if (pVersionStruct->loaderLayerInterfaceVersion >= 2) {
-            pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
-            pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
-            pVersionStruct->pfnGetPhysicalDeviceProcAddr = nullptr;
-        }
+    // Assinatura limpa para evitar conflito de linkage
+    VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
+        pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
+        pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
         return VK_SUCCESS;
     }
 }
