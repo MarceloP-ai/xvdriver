@@ -7,8 +7,6 @@
 
 #ifdef _WIN32
 #include <imgui_impl_win32.h>
-#else
-// No Android, usamos a implementa??o gen?rica ou Android
 #endif
 
 struct OverlayContext {
@@ -20,9 +18,14 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     bool isInitialized = false;
     float fps = 0.0f;
+    int frameCount = 0;
+    std::chrono::time_point<std::chrono::high_resolution_clock> lastTime;
 };
 
 OverlayContext g_Overlay;
+bool g_FrameReady = false;
+
+// Ponteiros de função Vulkan
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkCreateDevice g_pfnCreateDevice = nullptr;
@@ -30,30 +33,37 @@ PFN_vkCmdEndRenderPass g_pfnCmdEndRenderPass = nullptr;
 PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
 PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 
-void UpdateFPS() {
-    static auto lastTime = std::chrono::high_resolution_clock::now();
-    static int frames = 0;
+void UpdatePerformanceMetrics() {
+    g_Overlay.frameCount++;
     auto currentTime = std::chrono::high_resolution_clock::now();
-    frames++;
-    std::chrono::duration<float> elapsed = currentTime - lastTime;
-    if (elapsed.count() >= 1.0f) {
-        g_Overlay.fps = frames / elapsed.count();
-        frames = 0;
-        lastTime = currentTime;
+    std::chrono::duration<float> elapsed = currentTime - g_Overlay.lastTime;
+
+    if (elapsed.count() >= 0.5f) { // Atualiza a cada 500ms para suavizar a leitura
+        g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
+        g_Overlay.frameCount = 0;
+        g_Overlay.lastTime = currentTime;
     }
 }
 
 void SetupImGui() {
     if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device || !g_Overlay.physDevice) return;
 
-    VkDescriptorPoolSize pool_sizes[] = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1}};
-    VkDescriptorPoolCreateInfo pool_info = {VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
+    // Pool de descritores otimizada para mobile
+    VkDescriptorPoolSize pool_sizes[] = {
+        { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 }
+    };
+    VkDescriptorPoolCreateInfo pool_info = { VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO };
+    pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
     pool_info.pPoolSizes = pool_sizes;
-    vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
+
+    if (vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool) != VK_SUCCESS) return;
 
     ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.IniFilename = nullptr; // Evita IO de arquivo no Android para mais fluidez
+
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = g_Overlay.instance;
     ii.PhysicalDevice = g_Overlay.physDevice;
@@ -62,35 +72,45 @@ void SetupImGui() {
     ii.DescriptorPool = g_Overlay.descriptorPool;
     ii.MinImageCount = 2;
     ii.ImageCount = 3;
+    ii.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
 
+    // Layout de memória compatível para evitar crashes de compilação
     struct MemLayout { void* d[7]; VkSampleCountFlagBits msaa; VkRenderPass rp; };
     MemLayout* l = (MemLayout*)&ii;
     l->msaa = VK_SAMPLE_COUNT_1_BIT;
     l->rp = g_Overlay.renderPass;
 
-    ImGui_ImplVulkan_Init(&ii);
-    g_Overlay.isInitialized = true;
+    if (ImGui_ImplVulkan_Init(&ii)) {
+        g_Overlay.isInitialized = true;
+        g_Overlay.lastTime = std::chrono::high_resolution_clock::now();
+    }
 }
 
 extern "C" {
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
-        if (g_Overlay.isInitialized) {
+        // Só renderiza o overlay se o frame estiver pronto e não houver conflito de shader
+        if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
-            ImGui::SetNextWindowPos(ImVec2(20, 20));
-            ImGui::Begin("XVDriver", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            ImGui::TextColored(ImVec4(0, 1, 0, 1), "XVDriver ANDROID");
+            
+            ImGui::SetNextWindowPos(ImVec2(10, 10));
+            ImGui::Begin("XVDriver_Perf", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs);
+            
+            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "XVDriver Performance Mode");
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
+            
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
+            
+            g_FrameReady = false; // Consome o sinal de prontidão
         }
         g_pfnCmdEndRenderPass(commandBuffer);
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
         VkResult res = g_pfnCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
-        if (res == VK_SUCCESS) {
+        if (res == VK_SUCCESS && !g_Overlay.isInitialized) {
             g_Overlay.renderPass = *pRenderPass;
             SetupImGui();
         }
@@ -103,8 +123,9 @@ extern "C" {
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
-        UpdateFPS();
+        UpdatePerformanceMetrics();
         g_Overlay.graphicsQueue = queue;
+        g_FrameReady = true; // Sinaliza que o próximo passe pode receber o overlay
         return g_pfnQueuePresent(queue, pPresentInfo);
     }
 
@@ -122,7 +143,7 @@ extern "C" {
         std::string n = pName;
         if (n == "vkCreateDevice") return (PFN_vkVoidFunction)xv_vkCreateDevice;
         if (n == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
-        return nullptr;
+        return g_pfnGetInstanceProcAddr(instance, pName);
     }
 
     VKAPI_ATTR VkResult VKAPI_CALL vkNegotiateLoaderLayerInterfaceVersion(VkNegotiateLayerInterface* pVersionStruct) {
