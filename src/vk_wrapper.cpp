@@ -16,6 +16,9 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     
     char gpuName[256] = "Generic GPU";
+    uint32_t width = 0;
+    uint32_t height = 0;
+    
     bool isInitialized = false;
     float fps = 0.0f;
     float frameTime = 0.0f;
@@ -27,7 +30,6 @@ struct OverlayContext {
 OverlayContext g_Overlay;
 bool g_FrameReady = false;
 
-// Ponteiros de função
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkCreateDevice g_pfnCreateDevice = nullptr;
@@ -36,7 +38,6 @@ PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
 PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 
-// Função auxiliar de performance
 VkPresentModeKHR ChooseBestPresentMode(VkPhysicalDevice physDev, VkSurfaceKHR surface) {
     uint32_t count = 0;
     vkGetPhysicalDeviceSurfacePresentModesKHR(physDev, surface, &count, nullptr);
@@ -104,9 +105,15 @@ void SetupImGui() {
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
         VkSwapchainCreateInfoKHR modifiedInfo = *pCreateInfo;
+        
+        // Salva a resolução detectada
+        g_Overlay.width = pCreateInfo->imageExtent.width;
+        g_Overlay.height = pCreateInfo->imageExtent.height;
+
         modifiedInfo.presentMode = ChooseBestPresentMode(g_Overlay.physDevice, pCreateInfo->surface);
         if (modifiedInfo.presentMode == VK_PRESENT_MODE_MAILBOX_KHR && modifiedInfo.minImageCount < 3) 
             modifiedInfo.minImageCount = 3;
+            
         return g_pfnCreateSwapchain(device, &modifiedInfo, pAllocator, pSwapchain);
     }
 
@@ -114,18 +121,24 @@ extern "C" {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
+            
             ImVec4 color = (g_Overlay.fps >= 55.0f) ? ImVec4(0,1,0,1) : (g_Overlay.fps >= 30.0f ? ImVec4(1,1,0,1) : ImVec4(1,0,0,1));
+            
             ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
             ImGui::Begin("XVDriver_Tweak", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            
             ImGui::TextColored(color, "GPU: %s", g_Overlay.gpuName);
+            ImGui::Text("Res: %d x %d", g_Overlay.width, g_Overlay.height);
             ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "FPS Unlocked: ACTIVE");
             ImGui::Separator();
             ImGui::TextColored(color, "FPS: %.1f", g_Overlay.fps);
+            
             if (!g_Overlay.frameHistory.empty()) {
                 ImGui::PushStyleColor(ImGuiCol_PlotLines, color);
                 ImGui::PlotLines("##g", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 160, ImVec2(250, 50));
                 ImGui::PopStyleColor();
             }
+            
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
@@ -134,6 +147,7 @@ extern "C" {
         g_pfnCmdEndRenderPass(commandBuffer);
     }
 
+    // [Outras funções xv_... permanecem iguais ao código anterior]
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
         VkResult res = g_pfnCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
         if (res == VK_SUCCESS && !g_Overlay.isInitialized) {
