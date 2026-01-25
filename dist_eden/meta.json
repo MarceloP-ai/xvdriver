@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver Xtreme v5",
-  "version": "2.5.0",
+  "name": "XVDriver Pro Engine v6",
+  "version": "3.0.0",
   "author": "MarceloP-ai",
-  "description": "LOD Bias + Scale 0.70 + Adreno 750 Mask + V-Sync Bypass"
+  "description": "Fence Sync Opt + LOD Bias + Adreno Mask + Frame-time HUD"
 }
