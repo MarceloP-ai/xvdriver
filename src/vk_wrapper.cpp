@@ -48,6 +48,8 @@ void SetupImGui() {
     vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
+    
+    // Inicialização por lista para evitar problemas de parsing com o ponto '.'
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = VK_NULL_HANDLE;
     ii.PhysicalDevice = g_Overlay.physDevice;
@@ -65,7 +67,7 @@ void SetupImGui() {
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE && g_Overlay.graphicsQueue != VK_NULL_HANDLE) {
+        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) {
             SetupImGui();
         }
         if (g_Overlay.isInitialized) {
