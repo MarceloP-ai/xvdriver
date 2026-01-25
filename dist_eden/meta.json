@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver Elite Tweak",
-  "version": "1.2.0",
+  "name": "XVDriver v1.5 Debug",
+  "version": "1.5.0",
   "author": "MarceloP-ai",
-  "description": "Overlay Pro: FPS Unlocked + Res Detector"
+  "description": "Overlay com Logcat e ImGui Fixo"
 }
