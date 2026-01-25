@@ -5,7 +5,10 @@
 #include <string>
 #include <chrono>
 #include <vector>
-#include <algorithm>
+#include <android/log.h> // Para debug via Logcat
+
+#define LOG_TAG "XVDriver"
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
 struct OverlayContext {
     VkInstance instance = VK_NULL_HANDLE;
@@ -14,17 +17,12 @@ struct OverlayContext {
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkQueue graphicsQueue = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
-    
-    char gpuName[256] = "Generic GPU";
-    uint32_t width = 0;
-    uint32_t height = 0;
-    
+    char gpuName[256] = "GPU";
+    uint32_t width = 0, height = 0;
     bool isInitialized = false;
     float fps = 0.0f;
-    float frameTime = 0.0f;
     int frameCount = 0;
     std::chrono::time_point<std::chrono::high_resolution_clock> lastTime;
-    std::vector<float> frameHistory;
 };
 
 OverlayContext g_Overlay;
@@ -38,42 +36,11 @@ PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
 PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 
-VkPresentModeKHR ChooseBestPresentMode(VkPhysicalDevice physDev, VkSurfaceKHR surface) {
-    uint32_t count = 0;
-    vkGetPhysicalDeviceSurfacePresentModesKHR(physDev, surface, &count, nullptr);
-    std::vector<VkPresentModeKHR> modes(count);
-    vkGetPhysicalDeviceSurfacePresentModesKHR(physDev, surface, &count, modes.data());
-
-    for (const auto& m : modes) if (m == VK_PRESENT_MODE_MAILBOX_KHR) return m;
-    for (const auto& m : modes) if (m == VK_PRESENT_MODE_IMMEDIATE_KHR) return m;
-    return VK_PRESENT_MODE_FIFO_KHR;
-}
-
-void UpdateMetrics() {
-    g_Overlay.frameCount++;
-    auto currentTime = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<float> elapsed = currentTime - g_Overlay.lastTime;
-
-    if (elapsed.count() >= 0.5f) {
-        g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
-        g_Overlay.frameTime = (elapsed.count() / g_Overlay.frameCount) * 1000.0f;
-        g_Overlay.frameHistory.push_back(g_Overlay.fps);
-        if (g_Overlay.frameHistory.size() > 50) g_Overlay.frameHistory.erase(g_Overlay.frameHistory.begin());
-        g_Overlay.frameCount = 0;
-        g_Overlay.lastTime = currentTime;
-    }
-}
-
 void SetupImGui() {
     if (g_Overlay.isInitialized || !g_Overlay.renderPass || !g_Overlay.device) return;
 
-    VkPhysicalDeviceProperties props;
-    vkGetPhysicalDeviceProperties(g_Overlay.physDevice, &props);
-    strncpy(g_Overlay.gpuName, props.deviceName, 256);
-
     VkDescriptorPoolSize pool_sizes[] = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1}};
     VkDescriptorPoolCreateInfo pool_info = {VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-    pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
     pool_info.pPoolSizes = pool_sizes;
@@ -97,48 +64,27 @@ void SetupImGui() {
     l->msaa = VK_SAMPLE_COUNT_1_BIT;
     l->rp = g_Overlay.renderPass;
 
-    ImGui_ImplVulkan_Init(&ii);
-    g_Overlay.isInitialized = true;
-    g_Overlay.lastTime = std::chrono::high_resolution_clock::now();
+    if (ImGui_ImplVulkan_Init(&ii)) {
+        g_Overlay.isInitialized = true;
+        g_Overlay.lastTime = std::chrono::high_resolution_clock::now();
+        LOGI("ImGui Initialized Successfully");
+    }
 }
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
-        VkSwapchainCreateInfoKHR modifiedInfo = *pCreateInfo;
-        
-        // Salva a resolução detectada
         g_Overlay.width = pCreateInfo->imageExtent.width;
         g_Overlay.height = pCreateInfo->imageExtent.height;
-
-        modifiedInfo.presentMode = ChooseBestPresentMode(g_Overlay.physDevice, pCreateInfo->surface);
-        if (modifiedInfo.presentMode == VK_PRESENT_MODE_MAILBOX_KHR && modifiedInfo.minImageCount < 3) 
-            modifiedInfo.minImageCount = 3;
-            
-        return g_pfnCreateSwapchain(device, &modifiedInfo, pAllocator, pSwapchain);
+        // Removido o bloqueio de MAILBOX forçado para evitar crash
+        return g_pfnCreateSwapchain(device, pCreateInfo, pAllocator, pSwapchain);
     }
 
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
-            
-            ImVec4 color = (g_Overlay.fps >= 55.0f) ? ImVec4(0,1,0,1) : (g_Overlay.fps >= 30.0f ? ImVec4(1,1,0,1) : ImVec4(1,0,0,1));
-            
-            ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
-            ImGui::Begin("XVDriver_Tweak", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            
-            ImGui::TextColored(color, "GPU: %s", g_Overlay.gpuName);
-            ImGui::Text("Res: %d x %d", g_Overlay.width, g_Overlay.height);
-            ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "FPS Unlocked: ACTIVE");
-            ImGui::Separator();
-            ImGui::TextColored(color, "FPS: %.1f", g_Overlay.fps);
-            
-            if (!g_Overlay.frameHistory.empty()) {
-                ImGui::PushStyleColor(ImGuiCol_PlotLines, color);
-                ImGui::PlotLines("##g", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 160, ImVec2(250, 50));
-                ImGui::PopStyleColor();
-            }
-            
+            ImGui::Begin("XVD", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            ImGui::TextColored(ImVec4(0,1,0,1), "FPS: %.1f | %dx%d", g_Overlay.fps, g_Overlay.width, g_Overlay.height);
             ImGui::End();
             ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
@@ -147,29 +93,31 @@ extern "C" {
         g_pfnCmdEndRenderPass(commandBuffer);
     }
 
-    // [Outras funções xv_... permanecem iguais ao código anterior]
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
         VkResult res = g_pfnCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
-        if (res == VK_SUCCESS && !g_Overlay.isInitialized) {
+        if (res == VK_SUCCESS) {
             g_Overlay.renderPass = *pRenderPass;
             SetupImGui();
         }
         return res;
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateDevice(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDevice* pDevice) {
-        g_Overlay.physDevice = physicalDevice;
-        return g_pfnCreateDevice(physicalDevice, pCreateInfo, pAllocator, pDevice);
-    }
-
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
-        UpdateMetrics();
+        g_Overlay.frameCount++;
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> elapsed = now - g_Overlay.lastTime;
+        if (elapsed.count() >= 1.0f) {
+            g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
+            g_Overlay.frameCount = 0;
+            g_Overlay.lastTime = now;
+        }
         g_Overlay.graphicsQueue = queue;
         g_FrameReady = true;
         return g_pfnQueuePresent(queue, pPresentInfo);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
+        g_Overlay.device = device;
         std::string n = pName;
         if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
         if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
@@ -181,7 +129,6 @@ extern "C" {
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
         g_Overlay.instance = instance;
         std::string n = pName;
-        if (n == "vkCreateDevice") return (PFN_vkVoidFunction)xv_vkCreateDevice;
         if (n == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
         if (n == "vkCreateSwapchainKHR") {
             g_pfnCreateSwapchain = (PFN_vkCreateSwapchainKHR)g_pfnGetInstanceProcAddr(instance, "vkCreateSwapchainKHR");

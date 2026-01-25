@@ -245,9 +245,6 @@ xvdriver_BINARY_DIR:STATIC=C:/Projeto/xvdriver/build_android
 //Value Computed by CMake
 xvdriver_IS_TOP_LEVEL:STATIC=ON
 
-//Dependencies for the target
-xvdriver_LIB_DEPENDS:STATIC=general;vulkan;general;android;general;log;
-
 //Value Computed by CMake
 xvdriver_SOURCE_DIR:STATIC=C:/Projeto/xvdriver
 
