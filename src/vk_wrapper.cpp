@@ -29,36 +29,45 @@ void UpdateFPS() {
     frames++;
     std::chrono::duration<float> elapsed = currentTime - lastTime;
     if (elapsed.count() >= 1.0f) {
-        g_Overlay.fps = frames / elapsed.count();
+        g_Overlay.fps = frames / (elapsed.count() > 0 ? elapsed.count() : 1.0f);
         frames = 0;
         lastTime = currentTime;
     }
 }
 
 void SetupImGui() {
-    if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE) return;
+    if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE || g_Overlay.device == VK_NULL_HANDLE) return;
+
+    // Criar Descriptor Pool necessário para o ImGui
+    VkDescriptorPoolSize pool_sizes[] = { { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 } };
+    VkDescriptorPoolCreateInfo pool_info = {};
+    pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+    pool_info.maxSets = 1;
+    pool_info.poolSizeCount = 1;
+    pool_info.pPoolSizes = pool_sizes;
+    vkCreateDescriptorPool(g_Overlay.device, &pool_info, nullptr, &g_Overlay.descriptorPool);
 
     ImGui::CreateContext();
     
     ImGui_ImplVulkan_InitInfo init_info = {};
-    init_info.Instance = VK_NULL_HANDLE; 
+    init_info.Instance = VK_NULL_HANDLE;
     init_info.PhysicalDevice = g_Overlay.physDevice;
     init_info.Device = g_Overlay.device;
     init_info.Queue = g_Overlay.graphicsQueue;
     init_info.DescriptorPool = g_Overlay.descriptorPool;
     init_info.MinImageCount = 2;
     init_info.ImageCount = 3;
-    // Removidos membros problemáticos para teste inicial de compilação
-    // Se o RenderPass for obrigatório na sua versão, usaremos a assinatura de função antiga
+    init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    init_info.RenderPass = g_Overlay.renderPass;
 
-    ImGui_ImplVulkan_Init(&init_info, g_Overlay.renderPass);
-    
+    ImGui_ImplVulkan_Init(&init_info);
     g_Overlay.isInitialized = true;
 }
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) {
+        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE && g_Overlay.graphicsQueue != VK_NULL_HANDLE) {
             SetupImGui();
         }
         
@@ -66,7 +75,7 @@ extern "C" {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
             ImGui::SetNextWindowPos(ImVec2(10, 10));
-            ImGui::Begin("Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
+            ImGui::Begin("XVDriver", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
             ImGui::End();
             ImGui::Render();
