@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver Ultimate v4",
-  "version": "2.0.0",
+  "name": "XVDriver Xtreme v5",
+  "version": "2.5.0",
   "author": "MarceloP-ai",
-  "description": "Nuclear Mask (Adreno 750) + Performance Tuning + V-Sync Bypass"
+  "description": "LOD Bias + Scale 0.70 + Adreno 750 Mask + V-Sync Bypass"
 }

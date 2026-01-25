@@ -7,7 +7,7 @@
 #include <android/log.h>
 
 #define SCALE_FACTOR 0.70f 
-#define LOD_BIAS 2.0f  // Tuning: +2.0f deixa texturas leves (mais performance)
+#define LOD_BIAS 2.0f
 #define LOG_TAG "XVDriver_Core"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
@@ -34,34 +34,25 @@ PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 PFN_vkCmdSetViewport g_pfnCmdSetViewport = nullptr;
 PFN_vkCreateSampler g_pfnCreateSampler = nullptr;
+PFN_vkWaitForFences g_pfnWaitForFences = nullptr;
 
 extern "C" {
-    // 1. TEXTURE TUNING: Forçar texturas de alta performance
+    // 1. PERFORMANCE: Otimização de Sincronização (Reduz CPU Latency)
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkWaitForFences(VkDevice device, uint32_t fenceCount, const VkFence* pFences, VkBool32 waitAll, uint64_t timeout) {
+        // Reduzimos o timeout forçado para evitar que a CPU "durma" esperando a GPU
+        if (!g_pfnWaitForFences) g_pfnWaitForFences = (PFN_vkWaitForFences)g_pfnGetDeviceProcAddr(device, "vkWaitForFences");
+        return g_pfnWaitForFences(device, fenceCount, pFences, waitAll, timeout > 1000000 ? 1000000 : timeout);
+    }
+
+    // 2. TEXTURE TUNING
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSampler(VkDevice device, const VkSamplerCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSampler* pSampler) {
         VkSamplerCreateInfo modInfo = *pCreateInfo;
-        modInfo.mipLodBias += LOD_BIAS; // Força o uso de Mipmaps menores
-        
-        if (!g_pfnCreateSampler) {
-            g_pfnCreateSampler = (PFN_vkCreateSampler)g_pfnGetDeviceProcAddr(device, "vkCreateSampler");
-        }
+        modInfo.mipLodBias += LOD_BIAS;
+        if (!g_pfnCreateSampler) g_pfnCreateSampler = (PFN_vkCreateSampler)g_pfnGetDeviceProcAddr(device, "vkCreateSampler");
         return g_pfnCreateSampler(device, &modInfo, pAllocator, pSampler);
     }
 
-    // 2. GPU SPOOFING (Properties)
-    void MaskProperties(VkPhysicalDeviceProperties* props) {
-        props->vendorID = 0x5143;
-        props->deviceID = 0x41445245;
-        memset(props->deviceName, 0, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE);
-        strncpy(props->deviceName, g_Overlay.maskedGpuName, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE);
-    }
-
-    VKAPI_ATTR void VKAPI_CALL xv_vkGetPhysicalDeviceProperties(VkPhysicalDevice phys, VkPhysicalDeviceProperties* pProps) {
-        PFN_vkGetPhysicalDeviceProperties pfn = (PFN_vkGetPhysicalDeviceProperties)g_pfnGetInstanceProcAddr(g_Overlay.instance, "vkGetPhysicalDeviceProperties");
-        pfn(phys, pProps);
-        MaskProperties(pProps);
-    }
-
-    // 3. DOWNSCALING & VIEWPORT (Res Fix)
+    // 3. DOWNSCALING & UNLOCK FPS
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
         VkSwapchainCreateInfoKHR modInfo = *pCreateInfo;
         modInfo.imageExtent.width = (uint32_t)(pCreateInfo->imageExtent.width * SCALE_FACTOR);
@@ -72,22 +63,15 @@ extern "C" {
         return g_pfnCreateSwapchain(device, &modInfo, pAllocator, pSwapchain);
     }
 
-    VKAPI_ATTR void VKAPI_CALL xv_vkCmdSetViewport(VkCommandBuffer cmd, uint32_t first, uint32_t count, const VkViewport* pVp) {
-        VkViewport hackedVp = *pVp;
-        hackedVp.width = (float)g_Overlay.width;
-        hackedVp.height = (float)g_Overlay.height;
-        g_pfnCmdSetViewport(cmd, first, count, &hackedVp);
-    }
-
-    // 4. OVERLAY
+    // 4. OVERLAY (Com contador de Frame-time)
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame(); ImGui::NewFrame();
-            ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_Always);
-            ImGui::Begin("XVD_XTREME", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-            ImGui::TextColored(ImVec4(1, 0.5f, 0, 1), "XTREME TUNING ACTIVE");
+            ImGui::SetNextWindowPos(ImVec2(50, 50));
+            ImGui::Begin("XVD_PRO_ENGINE", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            ImGui::TextColored(ImVec4(0, 0.8f, 1, 1), "ENGINE OPTIMIZED");
             ImGui::Text("GPU: %s", g_Overlay.maskedGpuName);
-            ImGui::Text("LOD Bias: +%.1f (Fast Textures)", LOD_BIAS);
+            ImGui::Text("Frame-time: %.2f ms", 1000.0f / (g_Overlay.fps > 0 ? g_Overlay.fps : 1.0f));
             ImGui::TextColored(ImVec4(0, 1, 0, 1), "FPS: %.1f", g_Overlay.fps);
             ImGui::End(); ImGui::Render();
             ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
@@ -97,19 +81,19 @@ extern "C" {
         pfn(commandBuffer);
     }
 
+    // Hooks e Endereçamento
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
         g_Overlay.device = device;
         std::string n = pName;
         if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
-        if (n == "vkCmdSetViewport") return (PFN_vkVoidFunction)xv_vkCmdSetViewport;
         if (n == "vkCreateSampler") return (PFN_vkVoidFunction)xv_vkCreateSampler;
+        if (n == "vkWaitForFences") return (PFN_vkVoidFunction)xv_vkWaitForFences;
         return g_pfnGetDeviceProcAddr(device, pName);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
         g_Overlay.instance = instance;
         std::string n = pName;
-        if (n == "vkGetPhysicalDeviceProperties") return (PFN_vkVoidFunction)xv_vkGetPhysicalDeviceProperties;
         if (n == "vkCreateSwapchainKHR") {
             g_pfnCreateSwapchain = (PFN_vkCreateSwapchainKHR)g_pfnGetInstanceProcAddr(instance, "vkCreateSwapchainKHR");
             return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
