@@ -3,6 +3,10 @@
 #include <chrono>
 #include <fstream>
 #include <string>
+#include <map>
+
+// Armazena o ponteiro original da fun??o de apresenta??o
+PFN_vkQueuePresentKHR g_pfnNextQueuePresent = nullptr;
 
 extern "C" {
     void WriteLog(const std::string& msg) {
@@ -16,11 +20,15 @@ extern "C" {
         frameCount++;
         auto currentTime = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> elapsed = currentTime - lastTime;
+        
         if (elapsed.count() >= 1.0) {
             WriteLog("FPS: " + std::to_string(frameCount / elapsed.count()));
             frameCount = 0;
             lastTime = currentTime;
         }
+
+        // CHAMA A FUN??O REAL (Isso evita que o jogo trave ou a layer seja ignorada)
+        if (g_pfnNextQueuePresent) return g_pfnNextQueuePresent(queue, pPresentInfo);
         return VK_SUCCESS; 
     }
 
@@ -43,7 +51,13 @@ extern "C" {
             pVersionStruct->pfnGetInstanceProcAddr = xv_vkGetInstanceProcAddr;
             pVersionStruct->pfnGetDeviceProcAddr = xv_vkGetDeviceProcAddr;
             pVersionStruct->pfnGetPhysicalDeviceProcAddr = nullptr;
-            WriteLog("Layer Ativada!");
+
+            // Busca o ponteiro real do driver para o Present
+            if (pVersionStruct->pfnGetInstanceProcAddr) {
+                g_pfnNextQueuePresent = (PFN_vkQueuePresentKHR)pVersionStruct->pfnGetDeviceProcAddr(NULL, "vkQueuePresentKHR");
+            }
+            
+            WriteLog("Layer engatada na corrente Vulkan!");
         }
         return VK_SUCCESS;
     }
