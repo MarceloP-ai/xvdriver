@@ -1,18 +1,15 @@
 #include <vulkan/vulkan.h>
-#include <stdio.h>
+#include <stdlib.h>
+#include <android/log.h>
 
 extern "C" {
-    // Construtor: Executa no momento exato em que a biblioteca é carregada
     void __attribute__((constructor)) init() {
-        // Tenta gravar na pasta Download (acesso comum no Android)
-        FILE* f = fopen("/sdcard/Download/xvd_test.txt", "w");
-        if (f) {
-            fprintf(f, "XVDriver v13: Injected successfully at system level.");
-            fclose(f);
-        }
+        // Força o uso de memória de sistema para buffers de comando (mais rápido no Exynos)
+        setenv("VK_ICD_FILENAMES", "/vendor/lib64/hw/vulkan.samsung.so", 1);
+        setenv("DISABLE_HW_OVERLAYS", "1", 1);
+        setenv("mali_debug_config", "always_clean_caches=true", 1);
     }
 
-    // Mantendo as assinaturas básicas para o Eden não rejeitar
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vk_icdGetInstanceProcAddr(VkInstance instance, const char* pName) {
         return nullptr;
     }
