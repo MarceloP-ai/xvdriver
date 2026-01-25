@@ -1,4 +1,4 @@
-#include <vulkan/vulkan.h>
+﻿#include <vulkan/vulkan.h>
 #include <vulkan/vk_layer.h>
 #include <imgui.h>
 #include <imgui_impl_vulkan.h>
@@ -39,8 +39,7 @@ void SetupImGui() {
     if (g_Overlay.isInitialized || g_Overlay.renderPass == VK_NULL_HANDLE || g_Overlay.device == VK_NULL_HANDLE) return;
 
     VkDescriptorPoolSize pool_sizes[] = { { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1 } };
-    VkDescriptorPoolCreateInfo pool_info = {};
-    pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    VkDescriptorPoolCreateInfo pool_info = { VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO };
     pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
     pool_info.maxSets = 1;
     pool_info.poolSizeCount = 1;
@@ -49,7 +48,7 @@ void SetupImGui() {
 
     ImGui::CreateContext();
     
-    // Inicialização por lista para evitar problemas de parsing com o ponto '.'
+    // Inicialização por posição (Braced Initializer) para evitar erro de membro/espaço
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = VK_NULL_HANDLE;
     ii.PhysicalDevice = g_Overlay.physDevice;
@@ -67,13 +66,10 @@ void SetupImGui() {
 
 extern "C" {
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) {
-            SetupImGui();
-        }
+        if (!g_Overlay.isInitialized && g_Overlay.renderPass != VK_NULL_HANDLE && g_Overlay.device != VK_NULL_HANDLE) SetupImGui();
         if (g_Overlay.isInitialized) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
-            ImGui::SetNextWindowPos(ImVec2(10, 10));
             ImGui::Begin("XVDriver", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
             ImGui::Text("FPS: %.1f", g_Overlay.fps);
             ImGui::End();
