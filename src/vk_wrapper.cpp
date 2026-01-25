@@ -10,8 +10,6 @@ struct OverlayContext {
     VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkDevice device = VK_NULL_HANDLE;
-    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-    VkQueue graphicsQueue = VK_NULL_HANDLE;
     bool isInitialized = false;
     float fps = 0.0f;
 };
@@ -20,6 +18,7 @@ OverlayContext g_Overlay;
 PFN_vkQueuePresentKHR g_pfnNextQueuePresent = nullptr;
 PFN_vkCreateSwapchainKHR g_pfnNextCreateSwapchain = nullptr;
 PFN_vkCreateRenderPass g_pfnNextCreateRenderPass = nullptr;
+PFN_vkEndCommandBuffer g_pfnNextEndCommandBuffer = nullptr;
 
 void UpdateFPS() {
     static auto lastTime = std::chrono::high_resolution_clock::now();
@@ -35,6 +34,24 @@ void UpdateFPS() {
 }
 
 extern "C" {
+    // Hook para injetar o desenho no final da lista de comandos
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
+        if (g_Overlay.isInitialized) {
+            ImGui_ImplVulkan_NewFrame();
+            ImGui::NewFrame();
+            
+            // Janela do FPS
+            ImGui::SetNextWindowPos(ImVec2(10, 10));
+            ImGui::Begin("XVDriver Overlay", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoSavedSettings);
+            ImGui::Text("FPS: %.1f", g_Overlay.fps);
+            ImGui::End();
+            
+            ImGui::Render();
+            ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
+        }
+        return g_pfnNextEndCommandBuffer(commandBuffer);
+    }
+
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass) {
         VkResult result = g_pfnNextCreateRenderPass(device, pCreateInfo, pAllocator, pRenderPass);
         if (result == VK_SUCCESS) g_Overlay.renderPass = *pRenderPass;
@@ -48,19 +65,12 @@ extern "C" {
 
     VKAPI_ATTR VkResult VKAPI_CALL xv_vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo) {
         UpdateFPS();
-        g_Overlay.graphicsQueue = queue;
-
-        // Se tivermos RenderPass e Device, o ImGui pode desenhar
-        if (g_Overlay.renderPass != VK_NULL_HANDLE && !g_Overlay.isInitialized) {
-            // Inicialização final do ImGui ocorreria aqui
-            g_Overlay.isInitialized = true;
-        }
-
         return g_pfnNextQueuePresent(queue, pPresentInfo);
     }
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetDeviceProcAddr(VkDevice device, const char* pName) {
         std::string n = pName;
+        if (n == "vkEndCommandBuffer") return (PFN_vkVoidFunction)xv_vkEndCommandBuffer;
         if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
         if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
@@ -69,6 +79,7 @@ extern "C" {
 
     VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL xv_vkGetInstanceProcAddr(VkInstance instance, const char* pName) {
         std::string n = pName;
+        if (n == "vkEndCommandBuffer") return (PFN_vkVoidFunction)xv_vkEndCommandBuffer;
         if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
         if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
