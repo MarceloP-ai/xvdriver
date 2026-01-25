@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "name": "XVDriver Pro Engine v6",
-  "version": "3.0.0",
+  "name": "XVDriver GOD MODE v7",
+  "version": "4.0.1",
   "author": "MarceloP-ai",
-  "description": "Fence Sync Opt + LOD Bias + Adreno Mask + Frame-time HUD"
+  "description": "AF Bypass + Extension Injection + LOD Bias 2.5 + Fix Swapchain"
 }
