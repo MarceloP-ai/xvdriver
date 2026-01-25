@@ -5,10 +5,7 @@
 #include <string>
 #include <chrono>
 #include <vector>
-
-#ifdef _WIN32
-#include <imgui_impl_win32.h>
-#endif
+#include <algorithm>
 
 struct OverlayContext {
     VkInstance instance = VK_NULL_HANDLE;
@@ -30,12 +27,14 @@ struct OverlayContext {
 OverlayContext g_Overlay;
 bool g_FrameReady = false;
 
+// Ponteiros de função
 PFN_vkGetDeviceProcAddr g_pfnGetDeviceProcAddr = nullptr;
 PFN_vkGetInstanceProcAddr g_pfnGetInstanceProcAddr = nullptr;
 PFN_vkCreateDevice g_pfnCreateDevice = nullptr;
 PFN_vkCmdEndRenderPass g_pfnCmdEndRenderPass = nullptr;
 PFN_vkQueuePresentKHR g_pfnQueuePresent = nullptr;
 PFN_vkCreateRenderPass g_pfnCreateRenderPass = nullptr;
+PFN_vkCreateSwapchainKHR g_pfnCreateSwapchain = nullptr;
 
 void UpdateMetrics() {
     g_Overlay.frameCount++;
@@ -45,10 +44,8 @@ void UpdateMetrics() {
     if (elapsed.count() >= 0.5f) {
         g_Overlay.fps = g_Overlay.frameCount / elapsed.count();
         g_Overlay.frameTime = (elapsed.count() / g_Overlay.frameCount) * 1000.0f;
-        
         g_Overlay.frameHistory.push_back(g_Overlay.fps);
         if (g_Overlay.frameHistory.size() > 50) g_Overlay.frameHistory.erase(g_Overlay.frameHistory.begin());
-        
         g_Overlay.frameCount = 0;
         g_Overlay.lastTime = currentTime;
     }
@@ -72,7 +69,7 @@ void SetupImGui() {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr;
-    io.FontGlobalScale = 2.5f; // Fonte maior para Android
+    io.FontGlobalScale = 2.5f;
 
     ImGui_ImplVulkan_InitInfo ii = {};
     ii.Instance = g_Overlay.instance;
@@ -88,35 +85,41 @@ void SetupImGui() {
     l->msaa = VK_SAMPLE_COUNT_1_BIT;
     l->rp = g_Overlay.renderPass;
 
-    if (ImGui_ImplVulkan_Init(&ii)) {
-        g_Overlay.isInitialized = true;
-        g_Overlay.lastTime = std::chrono::high_resolution_clock::now();
-    }
+    ImGui_ImplVulkan_Init(&ii);
+    g_Overlay.isInitialized = true;
+    g_Overlay.lastTime = std::chrono::high_resolution_clock::now();
 }
 
 extern "C" {
+    // INTERCEPÇÃO DE SWAPCHAIN: Força Desbloqueio de FPS
+    VKAPI_ATTR VkResult VKAPI_CALL xv_vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain) {
+        VkSwapchainCreateInfoKHR modifiedInfo = *pCreateInfo;
+        
+        // Tenta forçar IMMEDIATE (sem VSync) ou MAILBOX (menor latência)
+        // Isso ignora o pedido do jogo/emulador por FIFO (VSync ON)
+        modifiedInfo.presentMode = VK_PRESENT_MODE_IMMEDIATE_KHR; 
+
+        return g_pfnCreateSwapchain(device, &modifiedInfo, pAllocator, pSwapchain);
+    }
+
     VKAPI_ATTR void VKAPI_CALL xv_vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         if (g_Overlay.isInitialized && g_FrameReady) {
             ImGui_ImplVulkan_NewFrame();
             ImGui::NewFrame();
             
-            // Lógica de Cores Dinâmicas
-            ImVec4 statusColor;
-            if (g_Overlay.fps >= 55.0f) statusColor = ImVec4(0, 1, 0, 1);      // Verde
-            else if (g_Overlay.fps >= 30.0f) statusColor = ImVec4(1, 1, 0, 1); // Amarelo
-            else statusColor = ImVec4(1, 0, 0, 1);                           // Vermelho
+            ImVec4 statusColor = (g_Overlay.fps >= 55.0f) ? ImVec4(0,1,0,1) : (g_Overlay.fps >= 30.0f ? ImVec4(1,1,0,1) : ImVec4(1,0,0,1));
 
             ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
-            ImGui::Begin("XVDriver_Elite", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+            ImGui::Begin("XVDriver_Tweak", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
             
             ImGui::TextColored(statusColor, "GPU: %s", g_Overlay.gpuName);
+            ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "FPS Unlocked: ACTIVE");
             ImGui::Separator();
             ImGui::TextColored(statusColor, "FPS: %.1f", g_Overlay.fps);
-            ImGui::Text("FT: %.2f ms", g_Overlay.frameTime);
             
             if (!g_Overlay.frameHistory.empty()) {
                 ImGui::PushStyleColor(ImGuiCol_PlotLines, statusColor);
-                ImGui::PlotLines("##graph", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 120, ImVec2(250, 50));
+                ImGui::PlotLines("##g", g_Overlay.frameHistory.data(), g_Overlay.frameHistory.size(), 0, nullptr, 0, 160, ImVec2(250, 50));
                 ImGui::PopStyleColor();
             }
 
@@ -155,6 +158,7 @@ extern "C" {
         if (n == "vkCmdEndRenderPass") return (PFN_vkVoidFunction)xv_vkCmdEndRenderPass;
         if (n == "vkCreateRenderPass") return (PFN_vkVoidFunction)xv_vkCreateRenderPass;
         if (n == "vkQueuePresentKHR") return (PFN_vkVoidFunction)xv_vkQueuePresentKHR;
+        if (n == "vkCreateSwapchainKHR") return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
         return g_pfnGetDeviceProcAddr(device, pName);
     }
 
@@ -163,6 +167,13 @@ extern "C" {
         std::string n = pName;
         if (n == "vkCreateDevice") return (PFN_vkVoidFunction)xv_vkCreateDevice;
         if (n == "vkGetDeviceProcAddr") return (PFN_vkVoidFunction)xv_vkGetDeviceProcAddr;
+        
+        // Captura o ponteiro original para o Swapchain
+        if (n == "vkCreateSwapchainKHR") {
+            g_pfnCreateSwapchain = (PFN_vkCreateSwapchainKHR)g_pfnGetInstanceProcAddr(instance, "vkCreateSwapchainKHR");
+            return (PFN_vkVoidFunction)xv_vkCreateSwapchainKHR;
+        }
+
         return g_pfnGetInstanceProcAddr(instance, pName);
     }
 
