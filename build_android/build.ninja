@@ -110,6 +110,28 @@ build CMakeFiles/VkLayer_xvd.dir/src/imgui_impl_vulkan.cpp.o: CXX_COMPILER__VkLa
   TARGET_PDB = libVkLayer_xvd.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\VkLayer_xvd.dir
 
+build CMakeFiles/VkLayer_xvd.dir/src/logger.cpp.o: CXX_COMPILER__VkLayer_xvd_unscanned_ C$:/Projeto/xvdriver/src/logger.cpp || cmake_object_order_depends_target_VkLayer_xvd
+  DEFINES = -DVkLayer_xvd_EXPORTS
+  DEP_FILE = CMakeFiles\VkLayer_xvd.dir\src\logger.cpp.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu++17 -fPIC
+  INCLUDES = -isystem C:/Projeto/xvdriver/src
+  OBJECT_DIR = CMakeFiles\VkLayer_xvd.dir
+  OBJECT_FILE_DIR = CMakeFiles\VkLayer_xvd.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\VkLayer_xvd.dir\
+  TARGET_PDB = libVkLayer_xvd.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\VkLayer_xvd.dir
+
+build CMakeFiles/VkLayer_xvd.dir/src/xv_loader.cpp.o: CXX_COMPILER__VkLayer_xvd_unscanned_ C$:/Projeto/xvdriver/src/xv_loader.cpp || cmake_object_order_depends_target_VkLayer_xvd
+  DEFINES = -DVkLayer_xvd_EXPORTS
+  DEP_FILE = CMakeFiles\VkLayer_xvd.dir\src\xv_loader.cpp.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu++17 -fPIC
+  INCLUDES = -isystem C:/Projeto/xvdriver/src
+  OBJECT_DIR = CMakeFiles\VkLayer_xvd.dir
+  OBJECT_FILE_DIR = CMakeFiles\VkLayer_xvd.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\VkLayer_xvd.dir\
+  TARGET_PDB = libVkLayer_xvd.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\VkLayer_xvd.dir
+
 
 # =============================================================================
 # Link build statements for SHARED_LIBRARY target VkLayer_xvd
@@ -118,7 +140,7 @@ build CMakeFiles/VkLayer_xvd.dir/src/imgui_impl_vulkan.cpp.o: CXX_COMPILER__VkLa
 #############################################
 # Link the shared library libVkLayer_xvd.so
 
-build libVkLayer_xvd.so: CXX_SHARED_LIBRARY_LINKER__VkLayer_xvd_ CMakeFiles/VkLayer_xvd.dir/src/vk_wrapper.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_draw.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_tables.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_widgets.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_impl_vulkan.cpp.o
+build libVkLayer_xvd.so: CXX_SHARED_LIBRARY_LINKER__VkLayer_xvd_ CMakeFiles/VkLayer_xvd.dir/src/vk_wrapper.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_draw.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_tables.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_widgets.cpp.o CMakeFiles/VkLayer_xvd.dir/src/imgui_impl_vulkan.cpp.o CMakeFiles/VkLayer_xvd.dir/src/logger.cpp.o CMakeFiles/VkLayer_xvd.dir/src/xv_loader.cpp.o
   DEP_FILE = CMakeFiles\VkLayer_xvd.dir\link.d
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security
   LINK_FLAGS = -shared -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  -Xlinker --dependency-file=CMakeFiles\VkLayer_xvd.dir\link.d

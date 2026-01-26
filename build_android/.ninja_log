@@ -1,2 +1,10 @@
 # ninja log v7
-4	478	7911702849372444	CMakeFiles/VkLayer_xvd.dir/src/vk_wrapper.cpp.o	da54b50e4fbb23e9
+5	372	7911728697556941	CMakeFiles/VkLayer_xvd.dir/src/vk_wrapper.cpp.o	da54b50e4fbb23e9
+50	906	7911728698062901	CMakeFiles/VkLayer_xvd.dir/src/imgui_impl_vulkan.cpp.o	a707aa072cc6b3a9
+33	1579	7911728697905080	CMakeFiles/VkLayer_xvd.dir/src/imgui_tables.cpp.o	b33cbd8d7cc3994c
+924	2719	7911728706975441	CMakeFiles/VkLayer_xvd.dir/src/xv_loader.cpp.o	afe2d638834dc846
+488	2798	7911728702511170	CMakeFiles/VkLayer_xvd.dir/src/logger.cpp.o	c9ff81fcde1160e1
+23	2914	7911728697814824	CMakeFiles/VkLayer_xvd.dir/src/imgui_draw.cpp.o	8c55fde47f7b8695
+41	3259	7911728697985286	CMakeFiles/VkLayer_xvd.dir/src/imgui_widgets.cpp.o	633432d772d8610c
+15	4148	7911728697734578	CMakeFiles/VkLayer_xvd.dir/src/imgui.cpp.o	88bee59302e8a2e8
+4157	4349	7911728739055659	libVkLayer_xvd.so	7ba79075d370d276
