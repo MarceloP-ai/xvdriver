@@ -37,7 +37,7 @@ CMAKE_ASM_FLAGS_RELEASE:STRING=
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_BUILD_TYPE:STRING=
 
 //LLVM archiver
 CMAKE_CXX_COMPILER_AR:FILEPATH=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.exe
@@ -121,7 +121,7 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Projeto/xvdriver/build_android/CMakeFiles/pkgRedirects
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/xvdriver
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/XVDriver_Eden
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld.exe
@@ -167,7 +167,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=vulkan_samsung_hook
+CMAKE_PROJECT_NAME:STATIC=XVDriver_Eden
 
 //Value Computed by CMake
 CMAKE_PROJECT_SPDX_LICENSE:STATIC=
@@ -240,34 +240,16 @@ CMAKE_TOOLCHAIN_FILE:FILEPATH=C:/Android/ndk/android-ndk-r27d/build/cmake/androi
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Dependencies for the target
-vulkan.adreno_LIB_DEPENDS:STATIC=general;android;general;log;
-
-//Dependencies for the target
-vulkan.samsung_LIB_DEPENDS:STATIC=general;android;general;log;general;dl;
+VkLayer_xvd_LIB_DEPENDS:STATIC=general;android;general;log;general;vulkan;
 
 //Value Computed by CMake
-vulkan_samsung_hook_BINARY_DIR:STATIC=C:/Projeto/xvdriver/build_android
+XVDriver_Eden_BINARY_DIR:STATIC=C:/Projeto/xvdriver/build_android
 
 //Value Computed by CMake
-vulkan_samsung_hook_IS_TOP_LEVEL:STATIC=ON
+XVDriver_Eden_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-vulkan_samsung_hook_SOURCE_DIR:STATIC=C:/Projeto/xvdriver
-
-//Dependencies for the target
-vulkan_xvd_LIB_DEPENDS:STATIC=general;android;general;log;
-
-//Value Computed by CMake
-xvdriver_BINARY_DIR:STATIC=C:/Projeto/xvdriver/build_android
-
-//Value Computed by CMake
-xvdriver_IS_TOP_LEVEL:STATIC=ON
-
-//Dependencies for the target
-xvdriver_LIB_DEPENDS:STATIC=general;android;general;log;
-
-//Value Computed by CMake
-xvdriver_SOURCE_DIR:STATIC=C:/Projeto/xvdriver
+XVDriver_Eden_SOURCE_DIR:STATIC=C:/Projeto/xvdriver
 
 
 ########################

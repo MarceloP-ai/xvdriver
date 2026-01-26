@@ -1,6 +1,14 @@
-﻿{
-  "name": "XVD S24 Force Inject",
-  "version": "28.0",
-  "author": "XVD",
-  "api": "3"
+{
+  "file_format_version": "1.1.0",
+  "layer": {
+    "name": "VK_LAYER_XVD_Core",
+    "type": "GLOBAL",
+    "library_path": "libVkLayer_xvd.so",
+    "api_version": "1.3.275",
+    "implementation_version": "30",
+    "description": "XVD Xclipse Ultra Bypass for Eden",
+    "functions": {
+      "vkNegotiateLoaderLayerInterfaceVersion": "vkNegotiateLoaderLayerInterfaceVersion"
+    }
+  }
 }
