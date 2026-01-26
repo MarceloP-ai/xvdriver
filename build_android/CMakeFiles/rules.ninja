@@ -6,7 +6,7 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: xvdriver
+# Project: vulkan_samsung_hook
 # Configurations: Release
 # =============================================================================
 # =============================================================================
@@ -14,7 +14,7 @@
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__xvdriver_unscanned_Release
+rule CXX_COMPILER__vulkan.2esamsung_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\Android\ndk\android-ndk-r27d\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule CXX_COMPILER__xvdriver_unscanned_Release
 #############################################
 # Rule for linking CXX shared library.
 
-rule CXX_SHARED_LIBRARY_LINKER__xvdriver_Release
+rule CXX_SHARED_LIBRARY_LINKER__vulkan.2esamsung_Release
   depfile = $DEP_FILE
   deps = gcc
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\Android\ndk\android-ndk-r27d\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Android/ndk/android-ndk-r27d/toolchains/llvm/prebuilt/windows-x86_64/sysroot -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS $SONAME_FLAG$SONAME -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
